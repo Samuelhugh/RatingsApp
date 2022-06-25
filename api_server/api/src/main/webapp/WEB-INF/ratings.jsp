@@ -36,15 +36,9 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD</a>
-					</li>
-					<!-- update w/controller mapping -->
-					<li class="m-1 nav-item"><a class="nav-link"
-						href="/projects/new">ADD RENTAL</a></li>
-					<!-- update w/controller mapping -->
-					<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN
-							OUT</a></li>
-					<!-- update w/controller mapping -->
+					<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD</a> </li> 	<!-- update w/controller mapping -->
+					<li class="m-1 nav-item"><a class="nav-link"href="/projects/new">ADD RENTAL</a></li><!-- update w/controller mapping -->
+					<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>				<!-- update w/controller mapping -->
 				</div>
 			</nav>
 		</div>
