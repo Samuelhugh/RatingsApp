@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,19 +43,32 @@ public class User {
     private String displayName;
     
     @Column(name = "first_name")
+    @NotEmpty(message = "Please enter a first name.")
+    @Size(min = 3, max = 255, message = "First name must be between 3 and 255 characters.")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotEmpty(message = "Please enter a last name.")
+    @Size(min = 3, max = 255, message = "Last name must be between 3 and 255 characters.")
     private String lastName;
 
     @Column(name = "email")
-    @Email(message = "Please enter a valid emial address.")
+    @Email(message = "Please enter a valid email address.")
     private String email;
 
     @Column(name = "password_hash")
-    private String passwordHash;
+    @NotEmpty(message = "A password is required!")
+    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
+    private String password;
+
+    @Transient
+    @NotEmpty(message = "Please confirm your password.")
+    @Size(min = 8, max = 255, message = "Conform password must be between 8 and 255 characters")
+    private String confirmPassword;
 
     @Column(name = "age")
+    @NotEmpty(message = "Please enter your age.")
+    @Size(min = 18, message = "You need to be at least 18 to register on this site.")
     private Integer age;
 
     @JsonManagedReference(value = "user-rating")
@@ -60,22 +76,13 @@ public class User {
     private List<Rating> myRatings;
 
     
-    
     public User() {}
 
-    // public User(String firstName, String lastName, String email, String displayName, Integer age) {
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.email = email;
-    //     this.displayName = displayName;
-    //     this.age = age;
-    // }
-    
     @Override
     public String toString() {
         return "User [createdAt=" + createdAt + ", displayName=" + displayName + ", email=" + email + ", firstName="
                 + firstName + ", id=" + id + ", lastName=" + lastName + ", myRatings=" + myRatings + ", passwordHash="
-                + passwordHash + ", updatedAt=" + updatedAt + "]";
+                + password + ", updatedAt=" + updatedAt + "]";
     }
 
     @Override
@@ -161,12 +168,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Rating> getMyRatings() {
@@ -185,4 +192,11 @@ public class User {
         this.age = age;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

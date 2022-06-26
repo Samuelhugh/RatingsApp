@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,6 +38,8 @@ public class Property {
     private Date updatedAt;
 
     @Column(name = "address_line1")
+    @NotEmpty(message = "Please enter an address.")
+    @Size(min = 5, message = "Please enter an address of at least 5 characters.")
     private String addressLine1;
 
     @Column(name = "address_line2")
@@ -45,24 +49,34 @@ public class Property {
     private String imageUrl;
 
     @Column(name = "city")
+    // @NotEmpty(message = "Please enter a city name.")
     private String city;
 
     @Column(name = "state")
+    // @NotEmpty(message = "Please enter a state name.")
     private String state;
 
     @Column(name = "country")
+    // @NotEmpty(message = "Please enter a country name.")
     private String country;
 
 
     @Column(name = "description")
+    @NotEmpty(message = "Please enter a clear description of the rental.")
+    @Size(min = 5, message = "Please enter description with at least 5 characters.")
     private String description;
 
-    @Column(name = "price_usd_pennies")
-    private String priceUSDPennies;
+    @Column(name = "price_description")
+    @NotEmpty(message = "Please enter an accurate description of the rental price. (ex. $5 per night)")
+    private String priceDescripiton;
 
     @JsonManagedReference(value = "property-rating")
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Rating> myRatings;
+
+    @Column(name = "rental_type")
+    private String rentalType;
+
 
     public Property() {}
 
@@ -173,12 +187,12 @@ public class Property {
         this.description = description;
     }
 
-    public String getPriceUSDPennies() {
-        return priceUSDPennies;
+    public String getPriceDescription() {
+        return priceDescripiton;
     }
 
-    public void setPriceUSDPennies(String priceUSDPennies) {
-        this.priceUSDPennies = priceUSDPennies;
+    public void setPriceDesription(String priceDescription) {
+        this.priceDescripiton = priceDescription;
     }
 
     public List<Rating> getMyRatings() {

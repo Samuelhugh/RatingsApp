@@ -1,6 +1,6 @@
 package com.rental_ratings.api.api.mvc.services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,8 @@ public class RatingService {
         return ratingRepository.save(rating);
     }
     
-    public List<Rating> all() {
-		return this.ratingrepository.findAll();
+    public List<Rating> getAll() {
+		return this.ratingRepository.findAll();
 	}
 
     public Rating update(Rating rating) {
@@ -33,7 +33,7 @@ public class RatingService {
     }
     
     public Rating getById(Long id) {
-		return this.ratingrepository.findById(id).orElse(null);
+		return this.ratingRepository.findById(id).orElse(null);
 	}
 
 }
