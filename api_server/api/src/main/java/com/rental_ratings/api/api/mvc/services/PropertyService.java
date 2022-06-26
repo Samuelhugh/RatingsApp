@@ -1,5 +1,6 @@
 package com.rental_ratings.api.api.mvc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -33,7 +34,22 @@ public class PropertyService {
     }
 
 	public Property getById(Long id) {
-		return this.propertyrepository.findById(id).orElse(null);
+		Optional<Property> property = propertyRepository.findById(id);
+        if (property.isPresent()) {
+            return property.get();
+        }
+        return null;
 	}
-   
+
+    public List<Property> getByCity(String city) {
+        return propertyRepository.findAllByCity(city);
     }
+
+    public List<Property> getByState(String state) {
+        return propertyRepository.findAllByState(state);
+    }
+
+    public List<Property> getByCountry(String country) {
+        return propertyRepository.findAllByCountry(country);
+    }
+}
