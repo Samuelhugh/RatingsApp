@@ -41,6 +41,12 @@ public class PropertyService {
         return null;
 	}
 
+	// added method to find all properties for dashboard display //
+	public List<Property> findAll(){
+		return this.propertyRepository.findAll();
+	}
+	
+	
     public List<Property> getByCity(String city) {
         return propertyRepository.findAllByCity(city);
     }

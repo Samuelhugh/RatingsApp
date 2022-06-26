@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-12 mx-auto">
 			<form:form action="/properties/create" method="post"
-				modelAttribute="createProject" class="p-4 bg-transparent text-dark">
+				modelAttribute="createProperty" class="p-4 bg-transparent text-dark">
 				<div class="form-group">
 					<form:label path="addressLine1" class="py-2">Rental Address: </form:label>
 					<form:errors path="addressLine1" class="text-danger" />
