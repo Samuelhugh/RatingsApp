@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>RatingsApp</name>
+=======
 	<name>0-RatingsApp</name>
+>>>>>>> 0761b15850f8c80806740fb3200d82d2024c6240
 	<comment></comment>
 	<projects>
 	</projects>

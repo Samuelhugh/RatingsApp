@@ -1,0 +1,39 @@
+package com.rental_ratings.api.api.mvc.services;
+
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.rental_ratings.api.api.mvc.models.Property;
+import com.rental_ratings.api.api.mvc.repositories.PropertyRepository;
+
+@Service
+public class PropertyService {
+    
+    private final PropertyRepository propertyRepository;
+
+    public PropertyService(PropertyRepository propertyRepository) {
+        this.propertyRepository = propertyRepository;
+    }
+
+    public Property create(Property property) {
+        return propertyRepository.save(property);
+    }
+
+    public Property update(Property property) {
+        return propertyRepository.save(property);
+    }
+
+    public void delete(Property property) {
+        propertyRepository.delete(property);
+    }
+
+    public void delete(Long id) {
+        propertyRepository.deleteById(id);
+    }
+
+	public Property getById(Long id) {
+		return this.propertyrepository.findById(id).orElse(null);
+	}
+   
+    }

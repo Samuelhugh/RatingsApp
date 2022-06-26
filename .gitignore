@@ -31,6 +31,9 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java
+<<<<<<< HEAD
+=======
 .env
 .vscode
+>>>>>>> 0761b15850f8c80806740fb3200d82d2024c6240
 /.metadata/
