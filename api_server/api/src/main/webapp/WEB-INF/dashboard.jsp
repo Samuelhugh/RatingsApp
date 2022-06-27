@@ -17,16 +17,15 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-	<!-- change to match your file/naming structure -->
+	<!-- My CSS -->
     <link rel="stylesheet" href="/../views/css/main.css">
 	<title>Dashboard</title>
 </head>
-<body>
+<body class="body-bg">
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
 			<h1>Rental Ratings Applicaiton</h1>
 			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
-			<!-- update w/controller mapping -->
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
 			<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
@@ -45,7 +44,14 @@
 			</nav>
 		</div>
 	</div>
-	<div class="float float-left">
+	
+<div class="card container d-flex col-12 mx-auto justify-content-between bg-transparent mt-4 mb-2 p-4">
+		<div class="d-flex justify-content-between">
+			<div class="my-2">
+				<h2> All Property Listings</h2>
+			</div>
+		</div>
+	<div class="float float-left p-4 table table-hover">
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -61,11 +67,12 @@
 					<td><a href="/property/${ properties.id }">${ properties.addressLine1 }</a></td>
 					<td>${ properties.city }</td>
 					<td>${ properties.rentalType }</td>
-					<td></td>
+					<td> - placeholder - </td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
+</div>
  </body>
 </html>

@@ -52,22 +52,16 @@
 			<div class="">
 				<h2>Post a comment and rating</h2>
 				<br>
-				<h5>
-					Rental Address:
-					<c:out value="${property.addressLine1}" />
-				</h5>
-				<h5>
-					Posted By:
-					<c:out value="${property.leader.firstName}" />
-				</h5>
+				<h5>Rental Address: <c:out value="${ property.addressLine1 }, ${ property.city }, ${ property.state }" /></h5>
+				<h5>Posted By: <c:out value="${user.users.displayName}" /></h5>
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-			<form:form action="/properties/${id}/rating/create" method="post" modelAttribute="newRating" properties class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
+<%-- 			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="ratings" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
 				<div class="form-group">
-					<form:label path="ticket" class="">How was your stay? Add your comments and rating below: </form:label>
-					<form:errors path="ticket" class="text-danger" />
-					<form:textarea path="ticket" class="form-control bg-light" />
+					<form:label path="addRating" class="">How was your stay? Add your comments and rating below: </form:label>
+					<form:errors path="addRating" class="text-danger" />
+					<form:textarea path="addRating" class="form-control bg-light" />
 				</div>
 				<div>
 					<form:errors path="creator" class="error" />
@@ -75,12 +69,12 @@
 				</div>
 				<div>
 					<form:errors path="creator" class="error" />
-					<form:input type="hidden" path="propertyRanking" value="${properties.id}" class="form-control" />
+					<form:input type="hidden" path="propertyRanking" value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
 					<input type="submit" value="Add Ratings" class="btn btn-primary">
 				</p>
-			</form:form>
+			</form:form> --%>
 		</div>
 		<div class="my-5">
 			<h5>Customer Comments:</h5>
@@ -93,12 +87,12 @@
 						<th>Rating</th>
 					</tr>
 				<tbody>
-					<c:forEach items="${comments}" var="comment">
+					<c:forEach items="${comments}" var="comment"> <!-- update when avg comment logic complete -->
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>- placeholder - </td> 	<!-- update when avg comment logic complete -->
+							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
+							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
+							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
 						<tr>
 					</c:forEach>
 				</tbody>

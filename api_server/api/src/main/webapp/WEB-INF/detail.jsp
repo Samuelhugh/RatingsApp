@@ -17,10 +17,11 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+	<!-- My CSS -->
     <link rel="stylesheet" href="/../views/css/main.css">
 	<title>Rental Details</title>
 </head>
-<body>
+<body class="body-bg">
 
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
@@ -97,7 +98,7 @@
 				</c:if>
 			</div>	
 		</div>
-		
+	</div>
 <%-- 	<hr>
 	<h2>Rental Address: ${ property.addressLine1 }</h2>
 	<h2>Lender: ${ property.loggedInUser.firstName property.loggedInUser.lastName }</h2>
