@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,6 +37,7 @@ public class Rating {
     private Date updatedAt;
 
     @Column(name = "rating")
+    @Size(min = 1, max = 5, message = "The rating value can range from 1 to 5.")
     private Integer rating;
 
     @JsonBackReference(value = "user-rating")

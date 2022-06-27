@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -93,6 +94,9 @@ public class Property {
     @Column(name = "rental_type")
     private String rentalType;
 
+    @Column(name = "created_by_user_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private User createdByUser;
 
     public Property() {}
 
@@ -217,6 +221,30 @@ public class Property {
 
     public void setMyRatings(List<Rating> myRatings) {
         this.myRatings = myRatings;
+    }
+
+    public String getPriceDescripiton() {
+        return priceDescripiton;
+    }
+
+    public void setPriceDescripiton(String priceDescripiton) {
+        this.priceDescripiton = priceDescripiton;
+    }
+
+    public String getRentalType() {
+        return rentalType;
+    }
+
+    public void setRentalType(String rentalType) {
+        this.rentalType = rentalType;
+    }
+
+    public User getCreatedByUser() {
+        return createdByUser;
+    }
+
+    public void setCreatedByUser(User createdByUser) {
+        this.createdByUser = createdByUser;
     }
 
 }
