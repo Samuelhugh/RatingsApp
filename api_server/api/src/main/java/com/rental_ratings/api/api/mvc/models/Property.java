@@ -42,8 +42,8 @@ public class Property {
     @Size(min = 5, message = "Please enter an address of at least 5 characters.")
     private String addressLine1;
 
-    @Column(name = "address_line2")
-    private String addressLine2;
+//    @Column(name = "address_line2")
+//    private String addressLine2;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -70,7 +70,23 @@ public class Property {
     @NotEmpty(message = "Please enter an accurate description of the rental price. (ex. $5 per night)")
     private String priceDescripiton;
 
-    @JsonManagedReference(value = "property-rating")
+    public String getPriceDescripiton() {
+		return priceDescripiton;
+	}
+
+	public void setPriceDescripiton(String priceDescripiton) {
+		this.priceDescripiton = priceDescripiton;
+	}
+
+	public String getRentalType() {
+		return rentalType;
+	}
+
+	public void setRentalType(String rentalType) {
+		this.rentalType = rentalType;
+	}
+
+	@JsonManagedReference(value = "property-rating")
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Rating> myRatings;
 
@@ -139,13 +155,13 @@ public class Property {
         this.addressLine1 = addressLine1;
     }
 
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
+//    public String getAddressLine2() {
+//        return addressLine2;
+//    }
+//
+//    public void setAddressLine2(String addressLine2) {
+//        this.addressLine2 = addressLine2;
+//    }
 
     public String getImageUrl() {
         return imageUrl;

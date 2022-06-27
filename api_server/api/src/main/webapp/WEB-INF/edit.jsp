@@ -31,7 +31,7 @@
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
 			<h1>Rental Ratings Applicaiton</h1>
-			<p class="mx-3">Welcome, ${loggedInUser.firstName}</p>
+			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
 			<!-- update w/controller mapping -->
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
@@ -44,7 +44,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 		<!-- update w/controller mapping -->
-						<li class="m-1 nav-item"><a class="nav-link" href="/projects/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
 						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>					<!-- update w/controller mapping -->
 					</ul>
 				</div>
@@ -52,14 +52,14 @@
 		</div>
 	</div>
 
-	<div class="card container bg-transparent mt-4 mb-4 p-4">
+		<div class="card container bg-transparent mt-4 mb-4 p-4">
 		<div class="d-flex col-12 mx-auto justify-content-between">
 			<div class="my-3">
 				<h2>Edit Rental</h2>
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-			<form:form action="/properties/${id}/update" method="put"
+			<form:form action="/property/${editProperty.id}/update" method="put"
 				modelAttribute="editProperty" class="p-4 bg-transparent text-dark">
 				<div class="form-group">
 					<form:label path="addressLine1" class="py-2">Rental Address: </form:label>
@@ -77,15 +77,26 @@
 					<form:input path="state" class="form-control" />
 				</div>
 				<div class="form-group">
+					<form:label path="country" class="py-2">Country: </form:label>
+					<form:errors path="country" class="text-danger" />
+					<form:input path="country" class="form-control h-25" rows="3" />
+				</div>
+				<div class="form-group">
 					<form:label path="description" class="py-2">Rental Description: </form:label>
 					<form:errors path="description" class="text-danger" />
 					<form:textarea path="description" class="form-control h-25"
 						rows="3" />
 				</div>
 				<div class="form-group">
-					<form:label path="priceUSDPennies" class="py-2">Rental Price: </form:label>
-					<form:errors path="priceUSDPennies" class="text-danger" />
-					<form:input path="priceUSDPennies" class="form-control h-25"
+					<form:label path="rentalType" class="py-2">Rental Type: </form:label>
+					<form:errors path="rentalType" class="text-danger" />
+					<form:input path="rentalType" class="form-control h-25"
+						rows="3" />
+				</div>
+				<div class="form-group">
+					<form:label path="priceDescripiton" class="py-2">Rental Price: </form:label>
+					<form:errors path="priceDescripiton" class="text-danger" />
+					<form:input path="priceDescripiton" class="form-control h-25"
 						rows="3" />
 				</div>
 				<div class="form-group">
@@ -93,17 +104,11 @@
 					<form:errors path="imageUrl" class="text-danger" />
 					<form:input path="imageUrl" class="form-control h-25" rows="3" />
 				</div>
-				<!-- <div class="form-group">
-                    <form:label path="dueDate" class="py-2">Deployment Date: </form:label>
-                    <form:errors path="dueDate" class="text-danger" />
-                    <form:input type="text" path="dueDate" id="datefield"
-                        class="date form-control" />
-                </div> -->
-				<div>
-					<form:errors path="leader" class="error" />
-					<form:input type="hidden" path="leader" value="${loggedInUser.id}"
+<%-- 				<div>
+					<form:errors path="displayName" class="error" />
+					<form:input type="hidden" path="displayName;" value="${loggedInUser.id}"
 						class="form-control" />
-				</div>
+				</div> --%>
 				<a href="/dashboard" class="btn btn-secondary">Cancel</a>		<!-- update w/controller mapping -->
 				<input type="submit" value="Update"
 					class="btn btn-primary mx-1 my-3">
@@ -113,11 +118,4 @@
 	</div>
 
 </body>
-
-<script type="text/javascript">
-	$(".date").datepicker({
-		format : "MM d yyyy",
-	});
-</script>
-
 </html>

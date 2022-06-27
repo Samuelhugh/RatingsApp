@@ -85,11 +85,12 @@ public class UserController {
 	/****** DASHBOARD ******/
 
 	@GetMapping("/dashboard")
-	public String dashboard(HttpSession session) {
+	public String dashboard(HttpSession session, Model viewModel) {
 
 		if (session.getAttribute("loggedInUser") != null) {
+			viewModel.addAttribute("property", propertyService.findAll());
 
-			return "redirect:/dashboard";
+			return "dashboard.jsp";
 		}
 
 		return "redirect:/";

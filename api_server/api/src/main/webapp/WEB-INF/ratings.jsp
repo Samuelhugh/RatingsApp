@@ -26,7 +26,8 @@
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
 			<h1>Rental Ratings Applicaiton</h1>
-			<p class="mx-3">Welcome, ${loggedInUser.firstName}</p>
+			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
+			<!-- update w/controller mapping -->
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
 			<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
@@ -36,9 +37,11 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD</a> </li> 	<!-- update w/controller mapping -->
-					<li class="m-1 nav-item"><a class="nav-link"href="/projects/new">ADD RENTAL</a></li><!-- update w/controller mapping -->
-					<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>				<!-- update w/controller mapping -->
+					<ul class="navbar-nav">
+						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 		<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>					<!-- update w/controller mapping -->
+					</ul>
 				</div>
 			</nav>
 		</div>
@@ -51,11 +54,11 @@
 				<br>
 				<h5>
 					Rental Address:
-					<c:out value="${properties.addressLine1}" />
+					<c:out value="${property.addressLine1}" />
 				</h5>
 				<h5>
 					Posted By:
-					<c:out value="${properties.leader.firstName}" />
+					<c:out value="${property.leader.firstName}" />
 				</h5>
 			</div>
 		</div>

@@ -66,10 +66,10 @@ public class User {
     @Size(min = 8, max = 255, message = "Conform password must be between 8 and 255 characters")
     private String confirmPassword;
 
-    @Column(name = "age")
-    @NotEmpty(message = "Please enter your age.")
-    @Size(min = 18, message = "You need to be at least 18 to register on this site.")
-    private Integer age;
+//    @Column(name = "age")
+//    @NotEmpty(message = "Please enter your age.")
+//    @Size(min = 18, message = "You need to be at least 18 to register on this site.")
+//    private Integer age;
 
     @JsonManagedReference(value = "user-rating")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -184,13 +184,13 @@ public class User {
         this.myRatings = myRatings;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+//    public Integer getAge() {
+//        return age;
+//    }
+//
+//    public void setAge(Integer age) {
+//        this.age = age;
+//    }
 
     public String getConfirmPassword() {
         return confirmPassword;
