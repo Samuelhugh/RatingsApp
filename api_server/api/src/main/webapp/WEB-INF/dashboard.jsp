@@ -12,17 +12,40 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
-	<script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 	<!-- change to match your file/naming structure -->
     <link rel="stylesheet" href="/../views/css/main.css">
 	<title>Dashboard</title>
 </head>
 <body>
-	<h1> Welcome, ${ loggedInUser.firstName }</h1>
+	<div class="mt-3 text-center ">
+		<div class="mx-4 d-flex justify-content-between align-items-center">
+			<h1>Rental Ratings Applicaiton</h1>
+			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
+			<!-- update w/controller mapping -->
+		</div>
+		<div class="mt-2 mx-4 mb-3 text-center nav">
+			<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarNav" aria-controls="navbarNav"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 		<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>					<!-- update w/controller mapping -->
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
 	<div class="float float-left">
-		<h3>Ideas</h3>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -33,16 +56,16 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${ allProperties }" var="properties">
+			<c:forEach items="${ property }" var="properties">
 				<tr>
-					<td><a href="/properties/${ properties.id }">${ properties.addressLine1 }</a></td>
+					<td><a href="/property/${ properties.id }">${ properties.addressLine1 }</a></td>
 					<td>${ properties.city }</td>
-					<td>properties.</td>
-					<td>properties.</td>
+					<td>${ properties.rentalType }</td>
+					<td></td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
-</body>
+ </body>
 </html>
