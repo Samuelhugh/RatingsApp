@@ -57,27 +57,40 @@
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-				<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRating" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
+			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newComment" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
 				<div class="form-group">
-					<form:label path="comment" class="">How was your stay? Add your comments and rating below: </form:label>
+					<form:label path="comment" class="">Comment:</form:label>
 					<form:errors path="comment" class="text-danger" />
 					<form:textarea path="comment" class="form-control bg-light" />
 				</div>
-				<div class="form-group">
-					<form:label path="rating" class="">Rating</form:label>
-					<form:errors path="rating" class="text-danger" />
-					<form:input type="number" path="rating" class="form-control bg-light" />
-				</div>
 				<div>
-					<form:errors path="user" class="error" />
-					<form:input type="hidden" path="user" value="${ratingsCreator.id}" class="form-control" />	<!-- update w/controller getMapping addAttribute -->
-				</div>
-				<div>
-					<form:errors path="property" class="error" />
+					<form:input type="hidden" path="user" value="${ratingsCreator.id}" class="form-control" />
 					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
-					<input type="submit" value="Add Ratings" class="btn btn-primary">
+					<input type="submit" value="Submit" class="btn btn-primary">
+				</p>
+			</form:form>
+		</div>
+		<div class="form-check form-check-inline col-12 mx-auto">
+			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRating">
+				<div class="form-group">
+					<form:label path="rating" class="">Rating:</form:label>
+					<form:errors path="rating" class="text-danger" />
+					<div class="btn-group" role="group">
+						<form:radiobutton value="1" path="rating" />
+						<form:radiobutton value="2" path="rating" />
+						<form:radiobutton value="3" path="rating" />
+						<form:radiobutton value="4" path="rating" />
+						<form:radiobutton value="5" path="rating" />
+					</div>
+				</div>
+				<div>
+					<form:input type="hidden" path="user" value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
+				</div>
+				<p class="d-flex col-9 my-2">
+					<input type="submit" value="Submit" class="btn btn-primary">
 				</p>
 			</form:form>
 		</div>
@@ -91,13 +104,21 @@
 						<th>Date Added</th>
 						<th>Rating</th>
 					</tr>
-				<tbody>
-					<c:forEach items="${ratings}" var="rating"> <!-- update when avg comment logic complete -->
+					<tbody>
+					<c:forEach items="${property.myRatings}" var="rating"> <!-- update when avg comment logic complete -->
 						<tr>
-							<td></td> 	<!-- update when avg comment logic complete -->
-							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
-							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
-							<td>- placeholder - </td>	<!-- update when avg comment logic complete -->
+							<c:set var="latest_comment"></c:set>
+							<td>
+								<c:forEach items="${property.myComments}" var="comment">
+									<c:if test="${comment.user.id  == rating.user.id}">
+										<c:set var="latest_comment" value="${latest_comment = comment.comment}"></c:set>
+									</c:if>
+								</c:forEach>
+								${latest_comment}
+							</td> 	<!-- update when avg comment logic complete -->
+							<td>${rating.user.displayName}</td>	<!-- update when avg comment logic complete -->
+							<td>${rating.createdAt}</td>	<!-- update when avg comment logic complete -->
+							<td>${rating.rating}</td>	<!-- update when avg comment logic complete -->
 						<tr>
 					</c:forEach>
 				</tbody>

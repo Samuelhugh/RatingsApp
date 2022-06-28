@@ -76,6 +76,10 @@ public class Property {
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Rating> myRatings;
 
+    @JsonManagedReference(value = "property-comment")
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
+    private List<Comment> myComments;
+
     @Column(name = "rental_type")
     private String rentalType;
 
@@ -83,7 +87,15 @@ public class Property {
     @JoinColumn(name="created_by_user_id")
     private User createdByUser;
 
-	public User getCreatedByUser() {
+	public List<Comment> getMyComments() {
+        return myComments;
+    }
+
+    public void setMyComments(List<Comment> myComments) {
+        this.myComments = myComments;
+    }
+
+    public User getCreatedByUser() {
 		return createdByUser;
 	}
 

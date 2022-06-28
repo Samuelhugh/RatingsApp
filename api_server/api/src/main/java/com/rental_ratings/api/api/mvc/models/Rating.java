@@ -14,7 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +38,8 @@ public class Rating {
     private Date updatedAt;
 
     @Column(name = "rating")
-    @Size(min = 1, max = 5, message = "The rating value can range from 1 to 5.")
+    @Max(5)
+    @Min(1)
     private Integer rating;
 
     @JsonBackReference(value = "user-rating")
@@ -65,7 +67,7 @@ public class Rating {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.user.getId(), this.property.getId());
+        return Objects.hash(this.id);
     }
 
     @PrePersist
@@ -104,7 +106,7 @@ public class Rating {
     }
 
     public Integer getRating() {
-        return rating;
+        return this.rating;
     }
 
     public void setRating(Integer rating) {
@@ -125,6 +127,12 @@ public class Rating {
 
     public void setProperty(Property property) {
         this.property = property;
+    }
+
+    @Override
+    public String toString() {
+        return "Rating [createdAt=" + createdAt + ", id=" + id + ", rating=" + rating
+                + ", updatedAt=" + updatedAt + "]";
     }
 
 }
