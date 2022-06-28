@@ -10,8 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -71,22 +72,6 @@ public class Property {
     @NotEmpty(message = "Please enter an accurate description of the rental price. (ex. $5 per night)")
     private String priceDescripiton;
 
-    public String getPriceDescripiton() {
-		return priceDescripiton;
-	}
-
-	public void setPriceDescripiton(String priceDescripiton) {
-		this.priceDescripiton = priceDescripiton;
-	}
-
-	public String getRentalType() {
-		return rentalType;
-	}
-
-	public void setRentalType(String rentalType) {
-		this.rentalType = rentalType;
-	}
-
 	@JsonManagedReference(value = "property-rating")
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private List<Rating> myRatings;
@@ -94,11 +79,19 @@ public class Property {
     @Column(name = "rental_type")
     private String rentalType;
 
-    @Column(name = "created_by_user_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="created_by_user_id")
     private User createdByUser;
 
-    public Property() {}
+	public User getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(User createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+
+	public Property() {}
 
     @Override
     public boolean equals (Object o) {
@@ -237,14 +230,6 @@ public class Property {
 
     public void setRentalType(String rentalType) {
         this.rentalType = rentalType;
-    }
-
-    public User getCreatedByUser() {
-        return createdByUser;
-    }
-
-    public void setCreatedByUser(User createdByUser) {
-        this.createdByUser = createdByUser;
     }
 
 }

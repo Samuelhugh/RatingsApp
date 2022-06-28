@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.rental_ratings.api.api.mvc.models.Comment;
 import com.rental_ratings.api.api.mvc.models.Property;
 import com.rental_ratings.api.api.mvc.models.Rating;
 import com.rental_ratings.api.api.mvc.models.User;
+import com.rental_ratings.api.api.mvc.services.CommentService;
 import com.rental_ratings.api.api.mvc.services.PropertyService;
 import com.rental_ratings.api.api.mvc.services.RatingService;
 import com.rental_ratings.api.api.mvc.services.UserService;
@@ -22,14 +24,14 @@ import com.rental_ratings.api.api.mvc.services.UserService;
 @Controller
 public class RatingController {
 
-	@Autowired
-	RatingService ratingService;
+	@Autowired	private RatingService ratingService;
 
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	PropertyService propertyService;
+	@Autowired	private PropertyService propertyService;
+	
+	@Autowired	private CommentService commentService;
 
 	// ****** RATE PROPERTY ******//
 	
@@ -45,7 +47,9 @@ public class RatingController {
 
 			Property property = propertyService.getById(id);
 			viewModel.addAttribute("property", property);
-//			viewModel.addAttribute("rating", property.getRating());
+			
+		    Comment aComment =
+			viewModel.addAttribute("comment", aComment);
 
 			return "ratings.jsp";
 		}
@@ -53,13 +57,14 @@ public class RatingController {
 		return "redirect:/dashboard";
 	}
 
-	@PostMapping("/property/{ratingAdded}")
-	public String addRating(@PathVariable("ratingAdded") Long id, @Valid @ModelAttribute("rating") Rating rating,
+	@PostMapping("/property/{ratingAdded}/ratings")
+	public String addRating(@PathVariable("ratingAdded") Long id, @Valid @ModelAttribute("newRating") Rating rating,
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			Property check = propertyService.getById(id);
 			model.addAttribute("ratings", rating);
 			model.addAttribute("propety", check);
+//			model.addAttribute("comment", new Comment());
 			return "ratings.jsp";
 		} else {
 			ratingService.create(rating);

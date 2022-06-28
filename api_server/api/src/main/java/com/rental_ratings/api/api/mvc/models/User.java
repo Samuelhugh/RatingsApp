@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -63,7 +64,7 @@ public class User {
 
     @Transient
     @NotEmpty(message = "Please confirm your password.")
-    @Size(min = 8, max = 255, message = "Conform password must be between 8 and 255 characters")
+    @Size(min = 8, max = 255, message = "Confirm password must be between 8 and 255 characters")
     private String confirmPassword;
 
 //    @Column(name = "age")
@@ -74,9 +75,19 @@ public class User {
     @JsonManagedReference(value = "user-rating")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Rating> myRatings;
-
     
-    public User() {}
+    @OneToMany(mappedBy="createdByUser", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Property> propertyUser;
+
+	public List<Property> getPropertyUser() {
+		return propertyUser;
+	}
+
+	public void setPropertyUser(List<Property> propertyUser) {
+		this.propertyUser = propertyUser;
+	}
+
+	public User() {}
 
     @Override
     public String toString() {

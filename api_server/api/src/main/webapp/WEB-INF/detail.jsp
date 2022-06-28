@@ -58,7 +58,7 @@
 			</div>
 			<div class="row g-3 mx-2 my-2">
 				<div class="col-3"> <h5>Posted By:</h5> </div>
-				<div class="col-6">${user.users.displayName}</div>	<!-- update when avg ratings logic complete -->
+				<div class="col-6">${property.createdByUser.displayName}</div>	<!-- update when avg ratings logic complete -->
 			</div>
 			<div class="row g-3 mx-2 my-2">
 				<div class="col-3"> <h5>Property Description:</h5> </div>
@@ -81,7 +81,7 @@
 				<div class="col-6"> <fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${property.updatedAt}"/></div>
 			</div>
 		<div class="p-4">
-		<img src="${ property.imageUrl }" class="img-thumbnail  alt="img-thumbnail">
+		<img src="${ property.imageUrl }" class="img-thumbnail"  alt="${ property.rentalType }" />
 		</div>
 			<div class="d-flex col-9 mt-3 my-2">
 				<a href="/property/${ property.id}/ratings" class="btn btn-primary mx-2">Comment & Rating</a>
@@ -92,7 +92,7 @@
 				<c:if test="${project.projectJoiners.contains(userLoggedIn) || project.leader.id == userLoggedIn.id }">
 					<c:choose>
 					<c:when test="${loggedInUser.id == project.xxxx.id}">
-						<a href="/property/${property.id }/review" class="btn btn-primary mx-2">Comment & Rating</a>
+						<a href="/property/${property.id }/ratings" class="btn btn-primary mx-2">Comment & Rating</a>
 					</c:when>
 					</c:choose>
 				</c:if>

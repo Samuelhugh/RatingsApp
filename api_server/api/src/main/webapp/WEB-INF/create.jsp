@@ -95,11 +95,9 @@
 					<form:errors path="imageUrl" class="text-danger" />
 					<form:input path="imageUrl" class="form-control h-25" rows="3" />
 				</div>
-<%-- 				<div>
-					<form:errors path="displayName" class="error" />
-					<form:input type="hidden" path="displayName;" value="${loggedInUser.id}"
-						class="form-control" />
-				</div> --%>
+				<div>
+					<form:input type="hidden" path="createdByUser" name="created_by_user_id" value="${loggedInUser.id}" />
+				</div>
 				<a href="/dashboard" class="btn btn-secondary">Cancel</a><!-- update w/controller mapping -->
 				<input type="submit" value="Create" class="btn btn-primary mx-1 my-3">
 			</form:form>
