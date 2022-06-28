@@ -18,11 +18,6 @@
 	crossorigin="anonymous">
 <!-- My CSS -->
 <link rel="stylesheet" href="/../views/css/main.css" />
-<!-- For any Bootstrap that uses JS or jQuery-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 <title>Edit Rental</title>
 </head>
 
@@ -104,14 +99,12 @@
 					<form:errors path="imageUrl" class="text-danger" />
 					<form:input path="imageUrl" class="form-control h-25" rows="3" />
 				</div>
-<%-- 				<div>
-					<form:errors path="displayName" class="error" />
-					<form:input type="hidden" path="displayName;" value="${loggedInUser.id}"
-						class="form-control" />
-				</div> --%>
-				<a href="/dashboard" class="btn btn-secondary">Cancel</a>		<!-- update w/controller mapping -->
+				<div>
+					<form:input type="hidden" path="createdByUser" name="created_by_user_id" value="${loggedInUser.id}" />
+				</div>
+				<a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>		<!-- update w/controller mapping -->
 				<input type="submit" value="Update"
-					class="btn btn-primary mx-1 my-3">
+					class="btn btn-outline-primary mx-1 my-3">
 
 			</form:form>
 		</div>

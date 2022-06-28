@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/../views/css/main.css">
 	<title>Create Rental Listing</title>
 </head>
-<body>
+<body class="body-bg">
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
 			<h1>Rental Ratings Applicaiton</h1>
@@ -98,8 +98,8 @@
 				<div>
 					<form:input type="hidden" path="createdByUser" name="created_by_user_id" value="${loggedInUser.id}" />
 				</div>
-				<a href="/dashboard" class="btn btn-secondary">Cancel</a><!-- update w/controller mapping -->
-				<input type="submit" value="Create" class="btn btn-primary mx-1 my-3">
+				<a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
+				<input type="submit" value="Create" class="btn btn-outline-primary mx-1 my-3">
 			</form:form>
 		</div>
 	</div>

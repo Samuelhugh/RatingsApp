@@ -38,9 +38,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 		<!-- update w/controller mapping -->
-						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
-						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>					<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 
+						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li>
+						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>	
 					</ul>
 				</div>
 			</nav>
@@ -68,7 +68,7 @@
 					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
-					<input type="submit" value="Submit" class="btn btn-primary">
+					<input type="submit" value="Submit" class="btn btn-outline-primary">
 				</p>
 			</form:form>
 		</div>
@@ -90,7 +90,7 @@
 					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
-					<input type="submit" value="Submit" class="btn btn-primary">
+					<input type="submit" value="Submit" class="btn btn-outline-primary">
 				</p>
 			</form:form>
 		</div>
@@ -117,7 +117,7 @@
 								${latest_comment}
 							</td> 	<!-- update when avg comment logic complete -->
 							<td>${rating.user.displayName}</td>	<!-- update when avg comment logic complete -->
-							<td>${rating.createdAt}</td>	<!-- update when avg comment logic complete -->
+							<td> <fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${rating.createdAt}"/> </td>	<!-- update when avg comment logic complete -->
 							<td>${rating.rating}</td>	<!-- update when avg comment logic complete -->
 						<tr>
 					</c:forEach>

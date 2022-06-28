@@ -1,22 +1,18 @@
 @charset "UTF-8";
-/* generated background gradient via https://htmlcheatsheet.com/css/ */
-/*.body-bg {
-		background-color: #979996;
-	
-background: #979996;
-	background: -moz-linear-gradient(left, #979996 0%, #B9B9B9 48%, #979996 100%);
-	background: -webkit-linear-gradient(left, #979996 0%, #B9B9B9 48%, #979996 100%);
-	background: linear-gradient(to right, #979996 0%, #B9B9B9 48%, #979996 100%);
- 	font-family: Helvetica, sans-serif; 
-}*/
 
-.card-bg {
+/* generated background gradient via https://htmlcheatsheet.com/css/ */
+.body-bg {
+	background-color: #E2EBF0;
+
+}
+
+/* .card-bg {
 	background: #1C6EA4;
 	background: -moz-linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 	background: -webkit-linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 	background: linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
 	font-family: Helvetica, sans-serif;
-}
+}*/
 
 .wrapper {
 	margin: 10vh;

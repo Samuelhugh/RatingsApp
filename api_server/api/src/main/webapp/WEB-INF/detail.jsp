@@ -58,7 +58,7 @@
 			</div>
 			<div class="row g-3 mx-2 my-2">
 				<div class="col-3"> <h5>Posted By:</h5> </div>
-				<div class="col-6">${property.createdByUser.displayName}</div>	<!-- update when avg ratings logic complete -->
+				<div class="col-6">${property.createdByUser.displayName}</div>
 			</div>
 			<div class="row g-3 mx-2 my-2">
 				<div class="col-3"> <h5>Property Description:</h5> </div>
@@ -84,39 +84,19 @@
 		<img src="${ property.imageUrl }" class="img-thumbnail"  alt="${ property.rentalType }" />
 		</div>
 			<div class="d-flex col-9 mt-3 my-2">
-				<a href="/property/${ property.id}/ratings" class="btn btn-primary mx-2">Comment & Rating</a>
-				<a href="/property/${ property.id }/edit" class="btn btn-primary mx-2">Edit Rental</a>
+				<a href="/property/${ property.id}/ratings" class="btn btn-outline-primary mx-2">Comment & Rating</a>
+				<a href="/property/${ property.id }/edit" class="btn btn-outline-primary mx-2">Edit Rental</a>
 					<form:form action="/property/${property.id}/delete" method="delete">
-						<input type="submit" value="Delete Rental" class="mx-2 btn btn-danger">
+						<input type="submit" value="Delete Rental" class="mx-2 btn btn-outline-danger">
 					</form:form>
-				<c:if test="${project.projectJoiners.contains(userLoggedIn) || project.leader.id == userLoggedIn.id }">
+<%-- 				<c:if test="${project.projectJoiners.contains(userLoggedIn) || project.leader.id == userLoggedIn.id }">
 					<c:choose>
 					<c:when test="${loggedInUser.id == project.xxxx.id}">
-						<a href="/property/${property.id }/ratings" class="btn btn-primary mx-2">Comment & Rating</a>
+						<a href="/property/${property.id }/ratings" class="btn btn-outline-primary mx-2">Comment & Rating</a>
 					</c:when>
 					</c:choose>
-				</c:if>
+				</c:if> --%>
 			</div>	
 		</div>
 	</div>
-<%-- 	<hr>
-	<h2>Rental Address: ${ property.addressLine1 }</h2>
-	<h2>Lender: ${ property.loggedInUser.firstName property.loggedInUser.lastName }</h2>
-	<h2>Property Description: ${ property.description }</h2>
-	<h2>Average Rating:</h2>
-	<h2>Rental Type: ${ property.rentalType }</h2>
-	<h2>Rental Per Night: ${ property.priceDescription }</h2>
-	<h2>Last Rated: ${ property.}</h2>
-	<img src="${ property.imageUrl }"alt=""/>
-	<a href="/property/${property.id }/review">Comment & Rating</a>
-		<a href="/property/${ property.id }/edit">Edit</a> | --%>
-<%-- 	<c:choose>
-	<c:when test="${ property.loggedInUser.id == loggedInUser.id }">
-		<form class="delete-form" action="/property/${ property.id }/delete" method="post">
-			<input type="hidden" name="_method" value="delete" />
-			<button>Delete</button>
-		</form>
-	</c:when>
-	</c:choose> --%>
-</body>
 </html>
