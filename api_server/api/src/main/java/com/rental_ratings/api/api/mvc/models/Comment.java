@@ -99,6 +99,11 @@ public class Comment {
         this.updatedAt = this.createdAt;
     }
 
+    @Override
+    public String toString() {
+        return "Comment [comment=" + comment + "]";
+    }
+
     @PreUpdate()
     protected void onUpdate() {
         this.updatedAt = new Date();

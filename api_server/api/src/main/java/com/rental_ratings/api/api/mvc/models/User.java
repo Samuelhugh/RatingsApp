@@ -204,7 +204,7 @@ public class User {
 //    }
 
     public String getConfirmPassword() {
-        return confirmPassword;
+        return this.confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {

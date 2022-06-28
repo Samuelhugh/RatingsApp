@@ -30,7 +30,7 @@ public class UserService {
         }
 
         if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
-            result.rejectValue("confirm", "Matches", "The Confirm Password must match the Password!");
+            result.rejectValue("confirmPassword", "Matches", "The Confirm Password must match the Password!");
         }
     }
 
