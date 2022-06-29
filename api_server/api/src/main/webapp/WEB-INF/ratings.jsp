@@ -57,21 +57,21 @@
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRatingComment" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
+			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRatingComment" class="p-4 bg-transparent text-dark">
 				<div class="form-group">
 					<form:label path="comment.comment" class="">Comment:</form:label>
 					<form:errors path="comment.comment" class="text-danger" />
 					<form:textarea path="comment.comment" class="form-control bg-light" />
 				</div>
-				<div class="form-group">
+				<div class="form-group mt-2">
 					<form:label path="rating.rating" class="">Rating:</form:label>
 					<form:errors path="rating.rating" class="text-danger" />
 					<div class="btn-group" role="group">
-						<form:radiobutton value="1" path="rating.rating" />
-						<form:radiobutton value="2" path="rating.rating" />
-						<form:radiobutton value="3" path="rating.rating" />
-						<form:radiobutton value="4" path="rating.rating" />
-						<form:radiobutton value="5" path="rating.rating" />
+						<form:radiobutton value="1" path="rating.rating" class="mx-1" />
+						<form:radiobutton value="2" path="rating.rating" class="mx-1"/>
+						<form:radiobutton value="3" path="rating.rating" class="mx-1"/>
+						<form:radiobutton value="4" path="rating.rating" class="mx-1"/>
+						<form:radiobutton value="5" path="rating.rating" class="mx-1"/>
 					</div>
 				</div>
 				<div>
@@ -98,7 +98,7 @@
 						<th>Rating</th>
 					</tr>
 					<tbody>
-					<c:forEach items="${property.myRatings}" var="rating"> <!-- update when avg comment logic complete -->
+					<c:forEach items="${property.myRatings}" var="rating"> 
 						<tr>
 							<c:set var="latest_comment"></c:set>
 							<td>
@@ -108,10 +108,10 @@
 									</c:if>
 								</c:forEach>
 								${latest_comment}
-							</td> 	<!-- update when avg comment logic complete -->
-							<td>${rating.user.displayName}</td>	<!-- update when avg comment logic complete -->
-							<td> <fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${rating.createdAt}"/> </td>	<!-- update when avg comment logic complete -->
-							<td>${rating.rating}</td>	<!-- update when avg comment logic complete -->
+							</td> 	
+							<td>${rating.user.displayName}</td>	
+							<td> <fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${rating.createdAt}"/> </td>
+							<td>${rating.rating}</td>
 						<tr>
 					</c:forEach>
 				</tbody>
