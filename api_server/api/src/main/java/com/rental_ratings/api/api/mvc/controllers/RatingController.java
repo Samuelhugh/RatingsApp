@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.rental_ratings.api.api.mvc.models.Comment;
 import com.rental_ratings.api.api.mvc.models.Property;
 import com.rental_ratings.api.api.mvc.models.Rating;
+import com.rental_ratings.api.api.mvc.models.RatingComment;
 import com.rental_ratings.api.api.mvc.models.User;
 import com.rental_ratings.api.api.mvc.services.CommentService;
 import com.rental_ratings.api.api.mvc.services.PropertyService;
@@ -39,11 +39,9 @@ public class RatingController {
 
 	// ****** RATE PROPERTY ******//
 	
-	@GetMapping("/property/{id}/ratings")
-	public String newRating(
-		@PathVariable("id") Long id,
-		@ModelAttribute("newRating") Rating rating,
-		@ModelAttribute("newComment") Comment comment,
+	@GetMapping("/property/{propertyId}/ratings")
+	public String newRatingComment(
+		@PathVariable("propertyId") Long propertyId,
 		Model viewModel,
 		HttpSession session) {
 
@@ -51,44 +49,46 @@ public class RatingController {
 
 			User user = (User) session.getAttribute("loggedInUser");
 			User ratingCreator = userService.getById(user.getId());
-			viewModel.addAttribute("ratingsCreator", ratingCreator);
-			viewModel.addAttribute("newRating", rating);
-			viewModel.addAttribute("newComment", comment);
+			Property property = propertyService.getById(propertyId);
 
-			Property property = propertyService.getById(id);
+			if (!viewModel.containsAttribute("newRatingComment")) {
+				RatingComment ratingComment = new RatingComment();
+				Rating rating = ratingService.getByUserAndProperty(ratingCreator, property);
+				if (rating != null) {
+					ratingComment.setRating(rating);
+				}
+				viewModel.addAttribute("newRatingComment", ratingComment);
+			}
+			viewModel.addAttribute("ratingsCreator", ratingCreator);
 			viewModel.addAttribute("property", property);
-			// System.out.println(ratingComment);
 			return "ratings.jsp";
 		}
 
 		return "redirect:/dashboard";
 	}
 
-	@PostMapping("/property/{ratingAdded}/ratings")
-	public String addRating(
-		@PathVariable("ratingAdded") Long id,
-		@Valid @ModelAttribute("newRating") Rating rating,
-		@Valid @ModelAttribute("newComment") Comment comment,
+	@PostMapping("/property/{propertyId}/ratings")
+	public String addRatingComment(
+		@PathVariable("propertyId") Long propertyId,
+		@Valid @ModelAttribute("newRatingComment") RatingComment ratingComment,
 		BindingResult result,
 		RedirectAttributes redirAttr,
 		Model model
 	) {
 	
-		if (rating.getRating() != null) {
-			Rating _user_rating = ratingService.getByUser(rating.getUser());
-			if (_user_rating == null) {
-				ratingService.create(rating);
-			} else {
-				System.out.println(rating);
-				System.out.println(_user_rating);
-				_user_rating.setRating(rating.getRating());
-				System.out.println(_user_rating);
-				ratingService.update(_user_rating);
-			}
+		
+		if (result.hasErrors()) {
+			redirAttr.addFlashAttribute("org.springframework.validation.BindingResult.newRatingComment", result);
+			redirAttr.addFlashAttribute("newRatingComment", ratingComment);
+
+			return "redirect:/property/{propertyId}/ratings/test";
 		}
-		if (comment.getComment() != null) {
-			commentService.create(comment);
-		}
-		return "redirect:/property/{ratingAdded}/ratings";
+		
+		System.out.println(ratingComment);
+		ratingService.create(ratingComment.getRating());
+		commentService.create(ratingComment.getComment());
+
+		return "redirect:/property/{propertyId}/ratings";
 	}
+
 }

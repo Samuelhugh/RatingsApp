@@ -3,6 +3,7 @@ package com.rental_ratings.api.api.mvc.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.rental_ratings.api.api.mvc.models.Property;
@@ -20,7 +21,13 @@ public class RatingService {
     }
 
     public Rating create(Rating rating) {
-        return ratingRepository.save(rating);
+        try {
+            Rating result = ratingRepository.save(rating);
+            return result;
+        } catch (DataIntegrityViolationException ex) {
+            Rating result = update(rating);
+            return result;
+        }
     }
     
     public List<Rating> getAll() {
@@ -36,11 +43,15 @@ public class RatingService {
     }
     
     public Rating getById(Long id) {
-		return this.ratingRepository.findById(id).orElse(null);
+		Optional<Rating> result = ratingRepository.findById(id);
+        if (result.isPresent()) {
+            return result.get();
+        }
+        return null;
 	}
 
-    public Rating getByUser(User user) {
-        Optional<Rating> r = ratingRepository.findByUserId(user.getId());
+    public Rating getByUserAndProperty(User user, Property property) {
+        Optional<Rating> r = ratingRepository.findByUserIdAndPropertyId(user.getId(), property.getId());
         if (r.isPresent()) {
             return r.get();
         }

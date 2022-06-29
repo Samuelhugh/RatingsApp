@@ -13,7 +13,7 @@ public interface RatingRepository extends CrudRepository<Rating, Long> {
     
     public List<Rating> findAll();
 
-    public Optional<Rating> findByUserId(Long userId);
+    public Optional<Rating> findByUserIdAndPropertyId(Long userId, Long propertyId);
 
     public List<Rating> findAllByPropertyId(Long propertyId);
 }
