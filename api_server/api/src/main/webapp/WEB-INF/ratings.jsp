@@ -57,37 +57,30 @@
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newComment" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
+			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRatingComment" class="p-4 bg-transparent text-dark">	<!-- update w/controller postMapping modelAttribute -->
 				<div class="form-group">
-					<form:label path="comment" class="">Comment:</form:label>
-					<form:errors path="comment" class="text-danger" />
-					<form:textarea path="comment" class="form-control bg-light" />
+					<form:label path="comment.comment" class="">Comment:</form:label>
+					<form:errors path="comment.comment" class="text-danger" />
+					<form:textarea path="comment.comment" class="form-control bg-light" />
 				</div>
-				<div>
-					<form:input type="hidden" path="user" value="${ratingsCreator.id}" class="form-control" />
-					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
-				</div>
-				<p class="d-flex col-9 my-2">
-					<input type="submit" value="Submit" class="btn btn-outline-primary">
-				</p>
-			</form:form>
-		</div>
-		<div class="form-check form-check-inline col-12 mx-auto">
-			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRating">
 				<div class="form-group">
-					<form:label path="rating" class="">Rating:</form:label>
-					<form:errors path="rating" class="text-danger" />
+					<form:label path="rating.rating" class="">Rating:</form:label>
+					<form:errors path="rating.rating" class="text-danger" />
 					<div class="btn-group" role="group">
-						<form:radiobutton value="1" path="rating" />
-						<form:radiobutton value="2" path="rating" />
-						<form:radiobutton value="3" path="rating" />
-						<form:radiobutton value="4" path="rating" />
-						<form:radiobutton value="5" path="rating" />
+						<form:radiobutton value="1" path="rating.rating" />
+						<form:radiobutton value="2" path="rating.rating" />
+						<form:radiobutton value="3" path="rating.rating" />
+						<form:radiobutton value="4" path="rating.rating" />
+						<form:radiobutton value="5" path="rating.rating" />
 					</div>
 				</div>
 				<div>
-					<form:input type="hidden" path="user" value="${ratingsCreator.id}" class="form-control" />
-					<form:input type="hidden" path="property" value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="comment.user" value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="comment.property" value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="rating.user" value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="rating.property" value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="rating.id.userId" value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="rating.id.propertyId" value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
 					<input type="submit" value="Submit" class="btn btn-outline-primary">
@@ -110,7 +103,7 @@
 							<c:set var="latest_comment"></c:set>
 							<td>
 								<c:forEach items="${property.myComments}" var="comment">
-									<c:if test="${comment.user.id  == rating.user.id}">
+									<c:if test="${comment.user.id  == rating.id.userId}">
 										<c:set var="latest_comment" value="${latest_comment = comment.comment}"></c:set>
 									</c:if>
 								</c:forEach>

@@ -53,7 +53,7 @@ public class User {
     @Size(min = 3, max = 255, message = "Last name must be between 3 and 255 characters.")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Email(message = "Please enter a valid email address.")
     private String email;
 
