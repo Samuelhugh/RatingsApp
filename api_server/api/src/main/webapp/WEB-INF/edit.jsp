@@ -27,7 +27,6 @@
 		<div class="mx-4 d-flex justify-content-between align-items-center">
 			<h1>Rental Ratings Applicaiton</h1>
 			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
-			<!-- update w/controller mapping -->
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
 			<nav class="navbar navbar-expand-lg navbar-light bg-transparent">
@@ -38,9 +37,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 		<!-- update w/controller mapping -->
-						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li> 	<!-- update w/controller mapping -->
-						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>					<!-- update w/controller mapping -->
+						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li>
+						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li>
+						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -102,10 +101,8 @@
 				<div>
 					<form:input type="hidden" path="createdByUser" name="created_by_user_id" value="${loggedInUser.id}" />
 				</div>
-				<a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>		<!-- update w/controller mapping -->
-				<input type="submit" value="Update"
-					class="btn btn-outline-primary mx-1 my-3">
-
+				<a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
+				<input type="submit" value="Update" class="btn btn-outline-primary mx-1 my-3">
 			</form:form>
 		</div>
 	</div>

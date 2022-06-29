@@ -55,19 +55,19 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Address</th>
-					<th>City</th>
+					<th>Property</th>
+					<!-- <th>Address</th> -->
+					<th>Location</th>
 					<th>Rental Type</th>
-					<th>Average Rating</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${ property }" var="properties">
 				<tr>
-					<td><a href="/property/${ properties.id }">${ properties.addressLine1 }</a></td>
-					<td>${ properties.city }</td>
-					<td>${ properties.rentalType }</td>
-					<td> - placeholder - </td>
+					<td><a href="/property/${ properties.id }"> <img src="${ properties.imageUrl }" class="img-thumbnail img-sml" alt="${ properties.rentalType }"/> </a></td>
+					<%-- <td><a href="/property/${ properties.id }">${ properties.addressLine1 }</a></td> --%>
+					<td class="align-middle">${ properties.city }, ${ properties.state }</td>
+					<td class="align-middle">${ properties.rentalType }</td>
 				</tr>
 			</c:forEach>
 			</tbody>
