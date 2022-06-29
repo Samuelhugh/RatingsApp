@@ -74,11 +74,11 @@ public class Property {
     private String priceDescripiton;
 
 	@JsonManagedReference(value = "property-rating")
-    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Rating> myRatings;
 
     @JsonManagedReference(value = "property-comment")
-    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Comment> myComments;
 
     @Column(name = "rental_type")

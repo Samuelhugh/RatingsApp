@@ -38,9 +38,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD </a></li> 
-						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD RENTAL</a></li>
-						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>	
+						<li class="m-1 nav-item"><a class="nav-link"
+							href="/dashboard">DASHBOARD </a></li>
+						<li class="m-1 nav-item"><a class="nav-link"
+							href="/property/new">ADD RENTAL</a></li>
+						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -50,37 +52,65 @@
 	<div class="card container mt-4 mb-4 p-4 bg-transparent">
 		<div class="d-flex col-12 mx-auto justify-content-between">
 			<div class="">
-				<h2>Post a comment and rating</h2>
+				<h2>Post a rating and comment</h2>
 				<br>
-				<h5>Rental Address: <c:out value="${ property.addressLine1 }, ${ property.city }, ${ property.state }" /></h5>
-				<h5>Posted By: <c:out value="${property.createdByUser.displayName}" /></h5>
+
+				<div class="row align-items-center">
+					<div class="row ">
+						<div class="col-5">
+							<h6>Rental Address:</h6>
+						</div>
+						<div class="col-6 ">${ property.addressLine1 }, ${ property.city }, ${ property.state}</div>
+					</div>
+				</div>
+
+				<div class="row align-items-center">
+					<div class="row mt-2">
+						<div class="col-5">
+							<h6>Posted by:</h6>
+						</div>
+						<div class="col-6 ">${property.createdByUser.displayName}
+						</div>
+					</div>
+				</div>
+
+				<%-- 				<h5>Rental Address: <c:out value="${ property.addressLine1 }, ${ property.city }, ${ property.state }" /></h5>
+				<h5>Posted By: <c:out value="${property.createdByUser.displayName}" /></h5> --%>
 			</div>
 		</div>
 		<div class="col-12 mx-auto">
-			<form:form action="/property/${property.id}/ratings" method="post" modelAttribute="newRatingComment" class="p-4 bg-transparent text-dark">
+			<form:form action="/property/${property.id}/ratings" method="post"
+				modelAttribute="newRatingComment"
+				class="p-4 bg-transparent text-dark">
+				<div class="form-group mt-2 mb-2">
+					<form:label path="rating.rating" class="">Rating:</form:label>
+					<form:errors path="rating.rating" class="text-danger" />
+					<div class="btn-group" role="group">
+						<form:radiobutton value="1" path="rating.rating" class="mx-1" />
+						<form:radiobutton value="2" path="rating.rating" class="mx-1" />
+						<form:radiobutton value="3" path="rating.rating" class="mx-1" />
+						<form:radiobutton value="4" path="rating.rating" class="mx-1" />
+						<form:radiobutton value="5" path="rating.rating" class="mx-1" />
+					</div>
+				</div>
 				<div class="form-group">
 					<form:label path="comment.comment" class="">Comment:</form:label>
 					<form:errors path="comment.comment" class="text-danger" />
 					<form:textarea path="comment.comment" class="form-control bg-light" />
 				</div>
-				<div class="form-group mt-2">
-					<form:label path="rating.rating" class="">Rating:</form:label>
-					<form:errors path="rating.rating" class="text-danger" />
-					<div class="btn-group" role="group">
-						<form:radiobutton value="1" path="rating.rating" class="mx-1" />
-						<form:radiobutton value="2" path="rating.rating" class="mx-1"/>
-						<form:radiobutton value="3" path="rating.rating" class="mx-1"/>
-						<form:radiobutton value="4" path="rating.rating" class="mx-1"/>
-						<form:radiobutton value="5" path="rating.rating" class="mx-1"/>
-					</div>
-				</div>
 				<div>
-					<form:input type="hidden" path="comment.user" value="${ratingsCreator.id}" class="form-control" />
-					<form:input type="hidden" path="comment.property" value="${property.id}" class="form-control" />
-					<form:input type="hidden" path="rating.user" value="${ratingsCreator.id}" class="form-control" />
-					<form:input type="hidden" path="rating.property" value="${property.id}" class="form-control" />
-					<form:input type="hidden" path="rating.id.userId" value="${ratingsCreator.id}" class="form-control" />
-					<form:input type="hidden" path="rating.id.propertyId" value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="comment.user"
+						value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="comment.property"
+						value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="rating.user"
+						value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="rating.property"
+						value="${property.id}" class="form-control" />
+					<form:input type="hidden" path="rating.id.userId"
+						value="${ratingsCreator.id}" class="form-control" />
+					<form:input type="hidden" path="rating.id.propertyId"
+						value="${property.id}" class="form-control" />
 				</div>
 				<p class="d-flex col-9 my-2">
 					<input type="submit" value="Submit" class="btn btn-outline-primary">
@@ -97,20 +127,19 @@
 						<th>Date Added</th>
 						<th>Rating</th>
 					</tr>
-					<tbody>
-					<c:forEach items="${property.myRatings}" var="rating"> 
+				<tbody>
+					<c:forEach items="${property.myRatings}" var="rating">
 						<tr>
 							<c:set var="latest_comment"></c:set>
-							<td>
-								<c:forEach items="${property.myComments}" var="comment">
+							<td><c:forEach items="${property.myComments}" var="comment">
 									<c:if test="${comment.user.id  == rating.id.userId}">
-										<c:set var="latest_comment" value="${latest_comment = comment.comment}"></c:set>
+										<c:set var="latest_comment"
+											value="${latest_comment = comment.comment}"></c:set>
 									</c:if>
-								</c:forEach>
-								${latest_comment}
-							</td> 	
-							<td>${rating.user.displayName}</td>	
-							<td> <fmt:formatDate type="both" dateStyle="medium" timeStyle="short" value="${rating.createdAt}"/> </td>
+								</c:forEach> ${latest_comment}</td>
+							<td>${rating.user.displayName}</td>
+							<td><fmt:formatDate type="both" dateStyle="medium"
+									timeStyle="short" value="${rating.createdAt}" /></td>
 							<td>${rating.rating}</td>
 						<tr>
 					</c:forEach>

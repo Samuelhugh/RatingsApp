@@ -68,7 +68,7 @@ public class Comment {
     private Comment parentComment;
 
     @JsonManagedReference(value = " comment-comment")
-    @OneToMany(mappedBy = "parentComment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "parentComment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Comment> childComments;
 
 	

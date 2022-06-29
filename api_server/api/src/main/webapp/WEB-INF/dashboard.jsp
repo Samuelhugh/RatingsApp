@@ -56,18 +56,18 @@
 			<thead>
 				<tr>
 					<th>Property</th>
-					<!-- <th>Address</th> -->
 					<th>Location</th>
 					<th>Rental Type</th>
+					<!-- <th>Rating</th> -->
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${ property }" var="properties">
+			<c:forEach items="${property}" var="properties">
 				<tr>
 					<td><a href="/property/${ properties.id }"> <img src="${ properties.imageUrl }" class="img-thumbnail img-sml" alt="${ properties.rentalType }"/> </a></td>
-					<%-- <td><a href="/property/${ properties.id }">${ properties.addressLine1 }</a></td> --%>
 					<td class="align-middle">${ properties.city }, ${ properties.state }</td>
 					<td class="align-middle">${ properties.rentalType }</td>
+					<%-- <td> <c:out value="${rating.rating}" /></td> --%>
 				</tr>
 			</c:forEach>
 			</tbody>
