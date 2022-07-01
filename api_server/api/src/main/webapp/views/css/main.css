@@ -1,19 +1,9 @@
 @charset "UTF-8";
-
 /* generated background gradient via https://htmlcheatsheet.com/css/ */
 .body-bg {
 	background-color: #E2EBF0;
 	font-family: Helvetica, sans-serif;
-
 }
-
-/* .card-bg {
-	background: #1C6EA4;
-	background: -moz-linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-	background: -webkit-linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-	background: linear-gradient(45deg, #1C6EA4 0%, #2388CB 50%, #144E75 100%);
-	font-family: Helvetica, sans-serif;
-}*/
 
 .wrapper {
 	margin: 10vh;
@@ -41,6 +31,12 @@
 .img-size {
 	width: 375px;
 	height: 250px;
+	border-radius: 20px;
+}
+
+.img-md {
+	width: 220px;
+	height: 140px;
 	border-radius: 20px;
 }
 
