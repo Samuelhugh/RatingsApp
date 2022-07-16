@@ -24,7 +24,7 @@
 <body class="body-bg">
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
-			<h1>Rental Ratings Applicaiton</h1>
+			<h1>Rental Ratings </h1>
 			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
@@ -51,8 +51,8 @@
 				<h2> All Property Listings</h2>
 			</div>
 		</div>
-	<div class="float float-left p-4 table table-hover">
-		<table class="table table-hover">
+	<div class="p-4 table table-hover">
+		<table class=" table table-hover">
 			<thead>
 				<tr>
 					<th>Property</th>
@@ -65,7 +65,7 @@
 			<c:forEach items="${property}" var="properties">
 				<tr>
 					<td><a href="/property/${ properties.id }"> <img src="${ properties.imageUrl }" class="img-thumbnail img-sml" alt="${ properties.rentalType }"/> </a></td>
-					<td class="align-middle">${ properties.city }, ${ properties.state }</td>
+					<td class="align-middle">${ properties.addressLine1}, ${ properties.city }, ${ properties.state }</td>
 					<td class="align-middle">${ properties.rentalType }</td>
 					<%-- <td> <c:out value="${rating.rating}" /></td> --%>
 				</tr>
