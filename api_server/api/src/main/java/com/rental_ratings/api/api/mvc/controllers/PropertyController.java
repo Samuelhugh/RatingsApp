@@ -102,7 +102,7 @@ public class PropertyController {
 			return "edit.jsp";
 		}
 
-		propertyService.update(property);
+		this.propertyService.update(property);
 		return "redirect:/dashboard";
 	}
 
