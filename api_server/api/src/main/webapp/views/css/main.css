@@ -1,20 +1,40 @@
 @charset "UTF-8";
-/* generated background gradient via https://htmlcheatsheet.com/css/ */
+/* generated background gradient via https://webgradiants.com/ */
 .body-bg {
-	background-color: #E2EBF0;
-	font-family: Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+	/* THEME - milkyway */
+	/* background-image: linear-gradient(to right, #a6abae 0%, #e2ebf0 100%); */
+
+	/* THEME Sharpeye Eagle */
+	background-image: linear-gradient(to right, #9890e3 0%, #b1f4cf 100%);
 }
 
 .wrapper {
-	margin: 10vh;
+	margin: 100vh;
 }
 
+/* .navbar {
+	position: sticky;
+	top: 0;
+} */
+
 .card {
-	border: none; 
+	border: none;
 	transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
 	overflow: hidden;
 	border-radius: 20px;
 	min-height: 350px;
+	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sml-card {
+	border: none;
+	transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+	overflow: hidden;
+	border-radius: 20px;
+	height: 375px;
+	width: 350px;
 	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -28,29 +48,82 @@
 	flex-wrap: wrap;
 }
 
-.img-size {
-	width: 375px;
-	height: 250px;
+.img-thumbnail {
+	border-color: #2d4f85;
+	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.img-lg {
+	width: 525px;
+	height: 325px;
 	border-radius: 20px;
+	border-color: #2d4f85;
+	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
 
 .img-md {
 	width: 220px;
 	height: 140px;
 	border-radius: 20px;
+	border-color: #2d4f85;
+	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
 
 .img-sml {
 	width: 150px;
 	height: 95px;
 	border-radius: 20px;
+	border-color: #2d4f85;
+	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 }
 
 .border {
-	border-color: #2D4F85;
+	border-color: #2d4f85;
 }
 
 .nav {
 	box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 20px;
+}
+
+/* allows styling of of background with no height limit */
+html,
+body {
+	height: 100vh;
+}
+
+.container-fluid {
+	height: 100vh;
+	overflow-y: hidden;
+	/* don't show content that exceeds my height */
+}
+
+.body-film {
+	min-height: 100vh;
+	overflow-y: scroll;
+}
+
+.sticky-btn {
+	position: sticky;
+	bottom: 1rem;
+}
+
+.shimmer-btn {
+	background-image: linear-gradient(
+		-60deg,
+		transparent,
+		transparent 40%,
+		#ffffff44 40%,
+		#ffffff44 60%,
+		transparent 60%,
+		transparent 100%
+	);
+	background-size: 200% 100%;
+	background-repeat: no-repeat;
+	background-position-x: 150%;
+}
+
+.shimmer-btn:hover {
+	background-position-x: -150%;
+	transition: background-position-x 600ms;
 }
