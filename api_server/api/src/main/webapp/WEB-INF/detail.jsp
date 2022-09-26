@@ -71,7 +71,7 @@
 				</div>
 				<div class="col-6">${ property.description }</div>
 			</div>
-			<!-- 								<div class="row g-3 mx-2 my-2">
+			<!-- <div class="row g-3 mx-2 my-2">
 				<div class="col-3">
 					<h5>Average Rating:</h5>
 				</div>
@@ -99,15 +99,15 @@
 				</div>
 			</div>
 			<div class="p-4">
-				<img src="${ property.imageUrl }" class="img-thumbnail img-size"
+				<img src="${ property.imageUrl }" class="img-lg"
 					alt="${ property.rentalType }" />
 			</div>
-			<div class="d-flex col-9 mt-3 my-2">
-				<a href="/property/${ property.id}/ratings" class="btn btn-outline-dark mx-2">Rate &
+			<div class="d-flex col-9 mt-3 my-2 btn-group-sm">
+				<a href="/property/${ property.id}/ratings" class="btn btn-outline-primary shimmer-btn shimmer-btn:hover mx-2">Rate &
 					Comment</a> <a href="/property/${ property.id }/edit"
-					class="btn btn-outline-dark mx-2">Edit Rental</a>
-				<form:form action="/property/${property.id}/delete" method="delete">
-					<input type="submit" value="Remove Rental" class="mx-2 btn btn-outline-danger">
+					class="btn btn-outline-primary shimmer-btn shimmer-btn:hover mx-2">Edit Rental</a>
+				<form:form action="/property/${property.id}/delete" method="delete" class="btn-group-sm">
+					<input type="submit" value="Remove Rental" class="mx-2 btn btn-outline-danger shimmer-btn shimmer-btn:hover">
 				</form:form>
 			</div>
 		</div>

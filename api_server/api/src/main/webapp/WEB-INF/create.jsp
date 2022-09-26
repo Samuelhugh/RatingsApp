@@ -40,7 +40,7 @@
 					<ul class="navbar-nav">
 						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD
 							</a></li>
-						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD
+						<li class="m-1 nav-item"><a class="nav-link disabled" href="/property/new">ADD
 								RENTAL</a></li>
 						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>
 					</ul>
@@ -61,51 +61,52 @@
 				<div class="form-group">
 					<form:label path="addressLine1" class="py-2">Rental Address: </form:label>
 					<form:errors path="addressLine1" class="text-danger" />
-					<form:input path="addressLine1" class="form-control text-primary fst-italic" />
+					<form:input path="addressLine1" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="city" class="py-2">Rental City: </form:label>
 					<form:errors path="city" class="text-danger" />
-					<form:input path="city" class="form-control text-primary fst-italic" />
+					<form:input path="city" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="state" class="py-2">Rental State: </form:label>
 					<form:errors path="state" class="text-danger" />
-					<form:input path="state" class="form-control text-primary fst-italic" />
+					<form:input path="state" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="country" class="py-2">Country: </form:label>
 					<form:errors path="country" class="text-danger" />
-					<form:input path="country" class="form-control text-primary fst-italic h-25" rows="3" />
+					<form:input path="country" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="description" class="py-2">Rental Description: </form:label>
 					<form:errors path="description" class="text-danger" />
 					<form:textarea path="description"
-						class="form-control text-primary fst-italic h-25" rows="3" />
+						class="form-control text-secondary fst-italic h-25" rows="2" />
 				</div>
 				<div class="form-group">
 					<form:label path="rentalType" class="py-2">Rental Type: </form:label>
 					<form:errors path="rentalType" class="text-danger" />
-					<form:input path="rentalType" class="form-control text-primary fst-italic h-25"
-						rows="3" />
+					<form:input path="rentalType" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="priceDescripiton" class="py-2">Rental Price: </form:label>
 					<form:errors path="priceDescripiton" class="text-danger" />
-					<form:input path="priceDescripiton" class="form-control text-primary fst-italic h-25" rows="3" />
+					<form:input path="priceDescripiton" class="form-control text-secondary fst-italic" />
 				</div>
 				<div class="form-group">
 					<form:label path="imageUrl" class="py-2">Image URL: </form:label>
 					<form:errors path="imageUrl" class="text-danger" />
-					<form:input path="imageUrl" class="form-control text-primary fst-italic h-25" rows="3" />
+					<form:input path="imageUrl" class="form-control text-secondary fst-italic" />
 				</div>
 				<div>
 					<form:input type="hidden" path="createdByUser" name="created_by_user_id"
 						value="${loggedInUser.id}" />
 				</div>
-				<a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
-				<input type="submit" value="Create" class="btn btn-outline-dark mx-1 my-3">
+				<div class="btn-group-sm">
+					<a href="/dashboard" class="btn btn-outline-secondary shimmer-btn shimmer-btn:hover mx-1">Cancel</a>
+					<input type="submit" value="Create" class="btn btn-outline-primary shimmer-btn shimmer-btn:hover mx-1 my-3">
+				</div>
 			</form:form>
 		</div>
 	</div>

@@ -52,7 +52,7 @@
 				<h2>Post a rating and comment</h2>
 				<div class="p-4 row ">
 					<div class="col-sm-2"><h6>Rental Property:</h6></div>
-					<div class="col-sm-5"><img src="${ property.imageUrl }" class=" img-md" alt="Rounded 3 image" /></div>
+					<div class="col-sm-5"><img src="${ property.imageUrl }" class="img-md" alt="Rounded 3 image" /></div>
 				</div>
 				<div class=" m-3 row ">
 					<div class="col-sm-2"><h6>Address:</h6></div>
@@ -97,8 +97,8 @@
 					<form:input type="hidden" path="rating.id.propertyId" value="${property.id}"
 						class="form-control" />
 				</div>
-				<p class="d-flex col-9 my-2">
-					<input type="submit" value="Submit" class="btn btn-outline-dark">
+				<p class="d-flex col-9 my-2 btn-group-sm">
+					<input type="submit" value="Submit" class="btn btn-outline-primary shimmer-btn shimmer-btn:hover">
 				</p>
 			</form:form>
 		</div>

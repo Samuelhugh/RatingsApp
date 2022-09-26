@@ -45,7 +45,8 @@
 		</div>
 	</div>
 	
-<div class="card container d-flex col-12 mx-auto justify-content-between bg-transparent mt-4 mb-2 p-4">
+ <%-- stacked small thumbnail table with card format --%>
+<%-- <div class="card container d-flex col-12 mx-auto justify-content-between bg-transparent mt-4 mb-2 p-4">
 		<div class="d-flex justify-content-between">
 			<div class="my-2">
 				<h2> All Property Listings</h2>
@@ -58,21 +59,49 @@
 					<th>Property</th>
 					<th>Location</th>
 					<th>Rental Type</th>
-					<!-- <th>Rating</th> -->
+				 	<th>Rating</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach items="${property}" var="properties">
 				<tr>
-					<td><a href="/property/${ properties.id }"> <img src="${ properties.imageUrl }" class="img-thumbnail img-sml" alt="${ properties.rentalType }"/> </a></td>
+					<td><a href="/property/${ properties.id }"> <img src="${ properties.imageUrl }" class="img-sml" alt="${ properties.rentalType }"/> </a></td>
 					<td class="align-middle">${ properties.addressLine1}, ${ properties.city }, ${ properties.state }</td>
 					<td class="align-middle">${ properties.rentalType }</td>
-					<%-- <td> <c:out value="${rating.rating}" /></td> --%>
+					<td> </td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
-</div>
+</div> --%>
+
+ <%-- full wrapped card view format --%>
+ <div class= "card container d-flex col-12 mx-auto justify-content-between bg-transparent mt-4 mb-4 p-4">
+		<div class="my-2">
+				<h2> Property Listings</h2>
+			<div class= "display-card bg-transparent mx-auto p-5">
+			<c:forEach items="${property}" var="properties">
+					<div class="card sml-card bg-transparent col-5 mx-auto mb-4 p-4">
+						<div class="row ">
+							<div class="col-12">
+								<div class="card-block btn-group-sm">
+									<h4 class="card-title"> <strong>${properties.city}, ${properties.state}</strong></h4>
+									<br>
+									<p class="card-text"> <img src="${properties.imageUrl}"  class="img-sml"/></p>
+									<p class="card-text"> <strong>Description:</strong> ${properties.description}</p>
+									<p class="card-text"> <strong>Posted by: </strong>${properties.createdByUser.displayName}</p>
+									<br> 
+									<div class="sticky-btn btn-group-sm mt-4">
+									<a href="/property/${properties.id}" class="btn btn-outline-primary shimmer-btn shimmer-btn:hover mx-2 ">More Details</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</c:forEach>
+			</div>
+		</div>
+	</div>
  </body>
 </html>
