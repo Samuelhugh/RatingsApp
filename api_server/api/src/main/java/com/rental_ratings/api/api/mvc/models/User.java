@@ -17,6 +17,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -41,30 +42,28 @@ public class User {
     private Date updatedAt;
 
     @Column(name = "display_name")
+    @NotBlank(message = "Please fill out Display Name")
     private String displayName;
     
     @Column(name = "first_name")
-    @NotEmpty(message = "Please enter a first name.")
-    @Size(min = 3, max = 255, message = "First name must be between 3 and 255 characters.")
+    @NotBlank(message = "Please enter a First Name")
     private String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty(message = "Please enter a last name.")
-    @Size(min = 3, max = 255, message = "Last name must be between 3 and 255 characters.")
+    @NotBlank(message = "Please enter a Last Name")
     private String lastName;
 
     @Column(name = "email", unique = true)
-    @Email(message = "Please enter a valid email address.")
+    @NotEmpty(message = "Please enter an E-mail address")
+    @Email(message = "Please enter a valid E-mail address")
     private String email;
 
     @Column(name = "password_hash")
-    @NotEmpty(message = "A password is required!")
-    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
+    @Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
     private String password;
 
     @Transient
-    @NotEmpty(message = "Please confirm your password.")
-    @Size(min = 8, max = 255, message = "Confirm password must be between 8 and 255 characters")
+    @Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
     private String confirmPassword;
 
 //    @Column(name = "age")

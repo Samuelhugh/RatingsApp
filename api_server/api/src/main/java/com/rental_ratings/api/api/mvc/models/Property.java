@@ -41,8 +41,7 @@ public class Property {
     private Date updatedAt;
 
     @Column(name = "address_line1")
-    @NotEmpty(message = "Please enter an address.")
-    @Size(min = 5, message = "Please enter an address of at least 5 characters.")
+    @NotEmpty(message = "Please enter Rental Address")
     private String addressLine1;
 
 //    @Column(name = "address_line2")
@@ -56,7 +55,7 @@ public class Property {
     private String city;
 
     @Column(name = "state")
-    // @NotEmpty(message = "Please enter a state name.")
+    @NotEmpty(message = "Please enter a State")
     private String state;
 
     @Column(name = "country")
@@ -65,12 +64,11 @@ public class Property {
 
 
     @Column(name = "description")
-    @NotEmpty(message = "Please enter a clear description of the rental.")
-    @Size(min = 5, message = "Please enter description with at least 5 characters.")
+    @NotEmpty(message = "Please enter a description of the Rental")
     private String description;
 
     @Column(name = "price_description")
-    @NotEmpty(message = "Please enter an accurate description of the rental price. (ex. $5 per night)")
+    @NotEmpty(message = "Please provide price")
     private String priceDescripiton;
 
 	@JsonManagedReference(value = "property-rating")

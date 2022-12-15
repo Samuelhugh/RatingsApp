@@ -23,8 +23,8 @@
 
 	<div class="mt-3 text-center ">
 		<div class="mx-4 d-flex justify-content-between align-items-center">
-			<h1>Rental Ratings </h1>
-			<p class="mx-3">Welcome, ${loggedInUser.displayName}</p>
+			<h1 class="font-weight-light">Rental Ratings </h1>
+			<p class="mx-3 font-weight-light">Welcome, ${loggedInUser.displayName}</p>
 			<!-- update w/controller mapping -->
 		</div>
 		<div class="mt-2 mx-4 mb-3 text-center nav">
@@ -36,11 +36,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="m-1 nav-item"><a class="nav-link" href="/dashboard">DASHBOARD
+						<li class="m-1 nav-item"><a class="nav-link font-weight-normal" href="/dashboard">DASHBOARD
 							</a></li>
-						<li class="m-1 nav-item"><a class="nav-link" href="/property/new">ADD
+						<li class="m-1 nav-item"><a class="nav-link font-weight-normal" href="/property/new">ADD
 								RENTAL</a></li>
-						<li class="m-1 nav-item"><a class="nav-link" href="/">SIGN OUT</a></li>
+						<li class="m-1 nav-item"><a class="nav-link font-weight-normal" href="/">SIGN OUT</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -49,7 +49,7 @@
 	<div class="card container mt-4 mb-4 p-4 bg-transparent">
 		<div class="d-flex col-12 mx-auto justify-content-between">
 			<div class="col-12">
-				<h2>Post a rating and comment</h2>
+				<h2 class="font-weight-light">Post a rating and comment</h2>
 				<div class="p-4 row ">
 					<div class="col-sm-2"><h6>Rental Property:</h6></div>
 					<div class="col-sm-5"><img src="${ property.imageUrl }" class=" img-md" alt="Rounded 3 image" /></div>
@@ -68,6 +68,7 @@
 			<form:form action="/property/${property.id}/ratings" method="post"
 				modelAttribute="newRatingComment" class="p-4 bg-transparent text-dark">
 				<div class="form-group mt-2 mb-2">
+				<p class="text-warning font-weight-italic">*Both rating and comment are required</p>
 					<form:label path="rating.rating" class="">Rating:</form:label>
 					<form:errors path="rating.rating" class="text-danger" />
 					<div class="btn-group" role="group">
@@ -79,7 +80,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<form:label path="comment.comment" class="">Comment:</form:label>
+					<form:label path="comment.comment" class="font-weight-light">Comment:</form:label>
 					<form:errors path="comment.comment" class="text-danger" />
 					<form:textarea path="comment.comment" class="form-control bg-light" />
 				</div>
@@ -106,7 +107,7 @@
 			<%-- <h5>Customer Comments:</h5> --%>
 			<table class="table table-hover ">
 				<thead>
-					<tr>
+					<tr class="font-weight-light">
 						<th>Comments</th>
 						<th>Added By</th>
 						<th>Date Added</th>
@@ -124,7 +125,7 @@
 									</c:if>
 								</c:forEach> ${latest_comment}
 							</td>
-							<td>${rating.user.displayName}</td>
+							<td class="font-weight-light">${rating.user.displayName}</td>
 							<td>
 								<fmt:formatDate type="both" dateStyle="medium" timeStyle="short"
 									value="${rating.createdAt}" />

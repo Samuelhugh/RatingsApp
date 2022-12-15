@@ -44,7 +44,7 @@ public class UserService {
     public User authenticate(LoginUser newLogin, BindingResult result) {
         Optional<User> user = userRepository.findByEmail(newLogin.getEmail());
         if (!user.isPresent()) {
-            result.rejectValue("email", "Login Email", "Email not registered.");
+            result.rejectValue("email", "Login Email","");
             return null;
         }
 

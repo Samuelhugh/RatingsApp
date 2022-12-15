@@ -32,10 +32,8 @@ public class PropertyController {
 	/***** CREATE PROPERTY ******/
 
 	@GetMapping("/property/new")
-	public String newProperty(@ModelAttribute("newProperty") Property property, HttpSession session) {
-
+	public String newProperty(@ModelAttribute("newProperty") Property property, HttpSession session, Model model) {
 		if (session.getAttribute("loggedInUser") != null) {
-
 			return "create.jsp";
 		}
 
