@@ -5,30 +5,31 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class LoginUser {
-    
-    @NotEmpty(message = "Please fill E-mail address")
-    @Email(message = "Please enter a valid E-mail address.")
-    private String email;
 
-    @Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
-    private String password;
+	@NotEmpty(message = "Please fill E-mail address")
+	@Email(message = "Please enter a valid E-mail address.")
+	private String email;
 
-    public LoginUser() {}
+	@Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
+	private String password;
 
-    public String getEmail() {
-        return email;
-    }
+	public LoginUser() {
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }

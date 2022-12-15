@@ -30,20 +30,17 @@ public class RatingController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private PropertyService propertyService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
 	// ****** RATE PROPERTY ******//
-	
+
 	@GetMapping("/property/{propertyId}/ratings")
-	public String newRatingComment(
-		@PathVariable("propertyId") Long propertyId,
-		Model viewModel,
-		HttpSession session) {
+	public String newRatingComment(@PathVariable("propertyId") Long propertyId, Model viewModel, HttpSession session) {
 
 		if (session.getAttribute("loggedInUser") != null) {
 
@@ -68,22 +65,17 @@ public class RatingController {
 	}
 
 	@PostMapping("/property/{propertyId}/ratings")
-	public String addRatingComment(
-		@PathVariable("propertyId") Long propertyId,
-		@Valid @ModelAttribute("newRatingComment") RatingComment ratingComment,
-		BindingResult result,
-		RedirectAttributes redirAttr,
-		Model model
-	) {
-	
-		
+	public String addRatingComment(@PathVariable("propertyId") Long propertyId,
+			@Valid @ModelAttribute("newRatingComment") RatingComment ratingComment, BindingResult result,
+			RedirectAttributes redirAttr, Model model) {
+
 		if (result.hasErrors()) {
 			redirAttr.addFlashAttribute("org.springframework.validation.BindingResult.newRatingComment", result);
 			redirAttr.addFlashAttribute("newRatingComment", ratingComment);
 
 			return "redirect:/property/{propertyId}/ratings/test";
 		}
-		
+
 		System.out.println(ratingComment);
 		ratingService.create(ratingComment.getRating());
 		commentService.create(ratingComment.getComment());

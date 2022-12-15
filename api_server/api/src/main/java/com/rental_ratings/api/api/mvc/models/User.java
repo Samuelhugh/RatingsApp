@@ -28,55 +28,55 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "users")
 public class User {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(name = "created_at", updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createdAt;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "updated_at")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updatedAt;
+	@Column(name = "created_at", updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
-    @Column(name = "display_name")
-    @NotBlank(message = "Please fill out Display Name")
-    private String displayName;
-    
-    @Column(name = "first_name")
-    @NotBlank(message = "Please enter a First Name")
-    private String firstName;
+	@Column(name = "updated_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
 
-    @Column(name = "last_name")
-    @NotBlank(message = "Please enter a Last Name")
-    private String lastName;
+	@Column(name = "display_name")
+	@NotBlank(message = "Please fill out Display Name")
+	private String displayName;
 
-    @Column(name = "email", unique = true)
-    @NotEmpty(message = "Please enter an E-mail address")
-    @Email(message = "Please enter a valid E-mail address")
-    private String email;
+	@Column(name = "first_name")
+	@NotBlank(message = "Please enter a First Name")
+	private String firstName;
 
-    @Column(name = "password_hash")
-    @Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
-    private String password;
+	@Column(name = "last_name")
+	@NotBlank(message = "Please enter a Last Name")
+	private String lastName;
 
-    @Transient
-    @Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
-    private String confirmPassword;
+	@Column(name = "email", unique = true)
+	@NotEmpty(message = "Please enter an E-mail address")
+	@Email(message = "Please enter a valid E-mail address")
+	private String email;
+
+	@Column(name = "password_hash")
+	@Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
+	private String password;
+
+	@Transient
+	@Size(min = 8, max = 255, message = "Must be atleast 8 characters!")
+	private String confirmPassword;
 
 //    @Column(name = "age")
 //    @NotEmpty(message = "Please enter your age.")
 //    @Size(min = 18, message = "You need to be at least 18 to register on this site.")
 //    private Integer age;
 
-    @JsonManagedReference(value = "user-rating")
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Rating> myRatings;
-    
-    @OneToMany(mappedBy="createdByUser", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Property> propertyUser;
+	@JsonManagedReference(value = "user-rating")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Rating> myRatings;
+
+	@OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Property> propertyUser;
 
 	public List<Property> getPropertyUser() {
 		return propertyUser;
@@ -86,113 +86,118 @@ public class User {
 		this.propertyUser = propertyUser;
 	}
 
-	public User() {}
+	public User() {
+	}
 
-    @Override
-    public String toString() {
-        return "User [createdAt=" + createdAt + ", displayName=" + displayName + ", email=" + email + ", firstName="
-                + firstName + ", id=" + id + ", lastName=" + lastName + ", myRatings=" + myRatings + ", passwordHash="
-                + password + ", updatedAt=" + updatedAt + "]";
-    }
+	@Override
+	public String toString() {
+		return "User [createdAt=" + createdAt + ", displayName=" + displayName + ", email=" + email + ", firstName="
+				+ firstName + ", id=" + id + ", lastName=" + lastName + ", myRatings=" + myRatings + ", passwordHash="
+				+ password + ", updatedAt=" + updatedAt + "]";
+	}
 
-    @Override
-    public boolean equals (Object o) {
-        
-        if (this == o) { return true; }
+	@Override
+	public boolean equals(Object o) {
 
-        if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
 
-        User that = (User) o;
-        return Objects.equals(this.id, that.id);
-    }
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.firstName, this.lastName, this.email);
-    }
+		User that = (User) o;
+		return Objects.equals(this.id, that.id);
+	}
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-        this.updatedAt = this.createdAt;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.id, this.firstName, this.lastName, this.email);
+	}
 
-    @PreUpdate()
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+		this.updatedAt = this.createdAt;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	@PreUpdate()
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public String getDisplayName() {
-        return displayName;
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+	public String getDisplayName() {
+		return displayName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public List<Rating> getMyRatings() {
-        return myRatings;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setMyRatings(List<Rating> myRatings) {
-        this.myRatings = myRatings;
-    }
+	public List<Rating> getMyRatings() {
+		return myRatings;
+	}
+
+	public void setMyRatings(List<Rating> myRatings) {
+		this.myRatings = myRatings;
+	}
 
 //    public Integer getAge() {
 //        return age;
@@ -202,11 +207,11 @@ public class User {
 //        this.age = age;
 //    }
 
-    public String getConfirmPassword() {
-        return this.confirmPassword;
-    }
+	public String getConfirmPassword() {
+		return this.confirmPassword;
+	}
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 }

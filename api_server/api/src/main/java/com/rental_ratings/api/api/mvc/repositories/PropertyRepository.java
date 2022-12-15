@@ -10,14 +10,14 @@ import com.rental_ratings.api.api.mvc.models.Property;
 
 @Repository
 public interface PropertyRepository extends CrudRepository<Property, Long> {
-    
-    public List<Property> findAll();
 
-    public Optional<Property> findById(Long id);
+	public List<Property> findAll();
 
-    public List<Property> findAllByCity(String city);
+	public Optional<Property> findById(Long id);
 
-    public List<Property> findAllByState(String state);
+	public List<Property> findAllByCity(String city);
 
-    public List<Property> findAllByCountry(String country);
+	public List<Property> findAllByState(String state);
+
+	public List<Property> findAllByCountry(String country);
 }

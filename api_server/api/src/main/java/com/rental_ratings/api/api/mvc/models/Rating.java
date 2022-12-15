@@ -22,117 +22,124 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "ratings", uniqueConstraints = { @UniqueConstraint(name = "SingleRating", columnNames = {"user_id", "property_id"})})
+@Table(name = "ratings", uniqueConstraints = {
+		@UniqueConstraint(name = "SingleRating", columnNames = { "user_id", "property_id" }) })
 public class Rating {
 
-    @EmbeddedId
-    private RatingsId id = new RatingsId();
+	@EmbeddedId
+	private RatingsId id = new RatingsId();
 
-    @Column(name = "created_at", updatable = false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
+	@Column(name = "created_at", updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
-    @Column(name = "updated_at")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
+	@Column(name = "updated_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
 
-    @Column(name = "rating")
-    @Max(5)
-    @Min(1)
-    @NotNull
-    private Integer rating;
+	@Column(name = "rating")
+	@Max(5)
+	@Min(1)
+	@NotNull
+	private Integer rating;
 
-    @JsonBackReference(value = "user-rating")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable= false)
-    private User user;
+	@JsonBackReference(value = "user-rating")
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private User user;
 
-    @JsonBackReference(value = "property-rating")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "property_id", insertable = false, updatable = false)
-    private Property property;
+	@JsonBackReference(value = "property-rating")
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "property_id", insertable = false, updatable = false)
+	private Property property;
 
-    public Rating() {}
+	public Rating() {
+	}
 
-    @Override
-    public boolean equals (Object o) {
-        
-        if (this == o) { return true; }
+	@Override
+	public boolean equals(Object o) {
 
-        if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
 
-        Rating that = (Rating) o;
-        return Objects.equals(this.user.getId(), that.user.getId()) && Objects.equals(this.property.getId(), that.property.getId());
-    }
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.user.getId(), this.property.getId());
-    }
+		Rating that = (Rating) o;
+		return Objects.equals(this.user.getId(), that.user.getId())
+				&& Objects.equals(this.property.getId(), that.property.getId());
+	}
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-        this.updatedAt = this.createdAt;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.user.getId(), this.property.getId());
+	}
 
-    @PreUpdate()
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+		this.updatedAt = this.createdAt;
+	}
 
-    public RatingsId getId() {
-        return id;
-    }
+	@PreUpdate()
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 
-    public void setId(RatingsId ratingsId) {
-        this.id = ratingsId;
-    }
+	public RatingsId getId() {
+		return id;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setId(RatingsId ratingsId) {
+		this.id = ratingsId;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public Integer getRating() {
-        return this.rating;
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
+	public Integer getRating() {
+		return this.rating;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public Property getProperty() {
-        return property;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setProperty(Property property) {
-        this.property = property;
-    }
+	public Property getProperty() {
+		return property;
+	}
 
-    @Override
-    public String toString() {
-        return "Rating [createdAt=" + createdAt + ", id=" + id + ", rating=" + rating + ", updatedAt=" + updatedAt
-                + "]";
-    }
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+
+	@Override
+	public String toString() {
+		return "Rating [createdAt=" + createdAt + ", id=" + id + ", rating=" + rating + ", updatedAt=" + updatedAt
+				+ "]";
+	}
 
 }

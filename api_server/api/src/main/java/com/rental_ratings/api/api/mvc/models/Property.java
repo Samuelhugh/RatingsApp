@@ -18,7 +18,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,74 +26,73 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "properties")
 public class Property {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(name = "created_at", updatable = false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "updated_at")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
+	@Column(name = "created_at", updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
-    @Column(name = "address_line1")
-    @NotEmpty(message = "Please enter Rental Address")
-    private String addressLine1;
+	@Column(name = "updated_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
+
+	@Column(name = "address_line1")
+	@NotEmpty(message = "Please enter Rental Address")
+	private String addressLine1;
 
 //    @Column(name = "address_line2")
 //    private String addressLine2;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+	@Column(name = "image_url")
+	private String imageUrl;
 
-    @Column(name = "city")
-    // @NotEmpty(message = "Please enter a city name.")
-    private String city;
+	@Column(name = "city")
+	// @NotEmpty(message = "Please enter a city name.")
+	private String city;
 
-    @Column(name = "state")
-    @NotEmpty(message = "Please enter a State")
-    private String state;
+	@Column(name = "state")
+	@NotEmpty(message = "Please enter a State")
+	private String state;
 
-    @Column(name = "country")
-    // @NotEmpty(message = "Please enter a country name.")
-    private String country;
+	@Column(name = "country")
+	// @NotEmpty(message = "Please enter a country name.")
+	private String country;
 
+	@Column(name = "description")
+	@NotEmpty(message = "Please enter a description of the Rental")
+	private String description;
 
-    @Column(name = "description")
-    @NotEmpty(message = "Please enter a description of the Rental")
-    private String description;
-
-    @Column(name = "price_description")
-    @NotEmpty(message = "Please provide price")
-    private String priceDescripiton;
+	@Column(name = "price_description")
+	@NotEmpty(message = "Please provide price")
+	private String priceDescripiton;
 
 	@JsonManagedReference(value = "property-rating")
-    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Rating> myRatings;
+	@OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+	private List<Rating> myRatings;
 
-    @JsonManagedReference(value = "property-comment")
-    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Comment> myComments;
+	@JsonManagedReference(value = "property-comment")
+	@OneToMany(mappedBy = "property", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+	private List<Comment> myComments;
 
-    @Column(name = "rental_type")
-    private String rentalType;
+	@Column(name = "rental_type")
+	private String rentalType;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="created_by_user_id")
-    private User createdByUser;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "created_by_user_id")
+	private User createdByUser;
 
 	public List<Comment> getMyComments() {
-        return myComments;
-    }
+		return myComments;
+	}
 
-    public void setMyComments(List<Comment> myComments) {
-        this.myComments = myComments;
-    }
+	public void setMyComments(List<Comment> myComments) {
+		this.myComments = myComments;
+	}
 
-    public User getCreatedByUser() {
+	public User getCreatedByUser() {
 		return createdByUser;
 	}
 
@@ -102,66 +100,71 @@ public class Property {
 		this.createdByUser = createdByUser;
 	}
 
-	public Property() {}
+	public Property() {
+	}
 
-    @Override
-    public boolean equals (Object o) {
-        
-        if (this == o) { return true; }
+	@Override
+	public boolean equals(Object o) {
 
-        if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
 
-        Property that = (Property) o;
-        return Objects.equals(this.id, that.id);
-    }
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
+		Property that = (Property) o;
+		return Objects.equals(this.id, that.id);
+	}
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-        this.updatedAt = this.createdAt;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.id);
+	}
 
-    @PreUpdate()
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+		this.updatedAt = this.createdAt;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	@PreUpdate()
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public String getAddressLine1() {
-        return addressLine1;
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
 
 //    public String getAddressLine2() {
 //        return addressLine2;
@@ -171,76 +174,76 @@ public class Property {
 //        this.addressLine2 = addressLine2;
 //    }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getPriceDescription() {
-        return priceDescripiton;
-    }
+	public String getPriceDescription() {
+		return priceDescripiton;
+	}
 
-    public void setPriceDesription(String priceDescription) {
-        this.priceDescripiton = priceDescription;
-    }
+	public void setPriceDesription(String priceDescription) {
+		this.priceDescripiton = priceDescription;
+	}
 
-    public List<Rating> getMyRatings() {
-        return myRatings;
-    }
+	public List<Rating> getMyRatings() {
+		return myRatings;
+	}
 
-    public void setMyRatings(List<Rating> myRatings) {
-        this.myRatings = myRatings;
-    }
+	public void setMyRatings(List<Rating> myRatings) {
+		this.myRatings = myRatings;
+	}
 
-    public String getPriceDescripiton() {
-        return priceDescripiton;
-    }
+	public String getPriceDescripiton() {
+		return priceDescripiton;
+	}
 
-    public void setPriceDescripiton(String priceDescripiton) {
-        this.priceDescripiton = priceDescripiton;
-    }
+	public void setPriceDescripiton(String priceDescripiton) {
+		this.priceDescripiton = priceDescripiton;
+	}
 
-    public String getRentalType() {
-        return rentalType;
-    }
+	public String getRentalType() {
+		return rentalType;
+	}
 
-    public void setRentalType(String rentalType) {
-        this.rentalType = rentalType;
-    }
+	public void setRentalType(String rentalType) {
+		this.rentalType = rentalType;
+	}
 
 }

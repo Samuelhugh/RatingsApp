@@ -28,167 +28,169 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "comments")
 public class Comment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "created_at", updatable= false)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
+	@Column(name = "created_at", updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
 	@Column(name = "updated_at")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
 
-    @Column(name = "on_comment_id", insertable = false, updatable= false)
-    private Long onCommentId;
+	@Column(name = "on_comment_id", insertable = false, updatable = false)
+	private Long onCommentId;
 
-    @Column(name = "on_property_id", insertable = false, updatable= false)
-    private Long onPropertyId;
+	@Column(name = "on_property_id", insertable = false, updatable = false)
+	private Long onPropertyId;
 
 	@Column(name = "comment")
-    @NotEmpty(message = "Please enter a comment.")
-    @Size(min = 5, message = "Please enter a comment of at least 5 characters.")
+	@NotEmpty(message = "Please enter a comment.")
+	@Size(min = 5, message = "Please enter a comment of at least 5 characters.")
 	public String comment;
-	
+
 	@JsonBackReference(value = "user-comment")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "by_user_id")
-    private User user;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "by_user_id")
+	private User user;
+
 	@JsonBackReference(value = "property-comment")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "on_property_id")
-    private Property property;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "on_property_id")
+	private Property property;
 
-    @JsonBackReference(value = "comment-comment")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "on_comment_id")
-    private Comment parentComment;
+	@JsonBackReference(value = "comment-comment")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "on_comment_id")
+	private Comment parentComment;
 
-    @JsonManagedReference(value = " comment-comment")
-    @OneToMany(mappedBy = "parentComment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Comment> childComments;
+	@JsonManagedReference(value = " comment-comment")
+	@OneToMany(mappedBy = "parentComment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
+	private List<Comment> childComments;
 
-	
-	public Comment() {}
-	
+	public Comment() {
+	}
+
 	@Override
-    public boolean equals (Object o) {
-        
-        if (this == o) { return true; }
+	public boolean equals(Object o) {
 
-        if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
 
-        Comment that = (Comment) o;
-        return Objects.equals(this.id, that.id);
-    }
-	
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Comment that = (Comment) o;
+		return Objects.equals(this.id, that.id);
+	}
+
 	@Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-	
-	
-	//on_comment_id
-	
-	
+	public int hashCode() {
+		return Objects.hash(this.id);
+	}
+
+	// on_comment_id
+
 	@PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-        this.updatedAt = this.createdAt;
-    }
+	protected void onCreate() {
+		this.createdAt = new Date();
+		this.updatedAt = this.createdAt;
+	}
 
-    @Override
-    public String toString() {
-        return "Comment [comment=" + comment + "]";
-    }
+	@Override
+	public String toString() {
+		return "Comment [comment=" + comment + "]";
+	}
 
-    @PreUpdate()
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
-	
-    public Long getId() {
-        return id;
-    }
+	@PreUpdate()
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+	public String getComment() {
+		return comment;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public Property getProperty() {
-        return property;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setProperty(Property property) {
-        this.property = property;
-    }
+	public Property getProperty() {
+		return property;
+	}
 
-    public Comment getParentComment() {
-        return parentComment;
-    }
+	public void setProperty(Property property) {
+		this.property = property;
+	}
 
-    public void setParentComment(Comment parentComment) {
-        this.parentComment = parentComment;
-    }
-    
-    //getters  and  setters  for on_comment_id
-    public List<Comment> getChildComments() {
-        return childComments;
-    }
+	public Comment getParentComment() {
+		return parentComment;
+	}
 
-    public void setChildComments(List<Comment> childComments) {
-        this.childComments = childComments;
-    }
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
 
-    public Long getOnCommentId() {
-        return onCommentId;
-    }
+	// getters and setters for on_comment_id
+	public List<Comment> getChildComments() {
+		return childComments;
+	}
 
-    public void setOnCommentId(Long onCommentId) {
-        this.onCommentId = onCommentId;
-    }
+	public void setChildComments(List<Comment> childComments) {
+		this.childComments = childComments;
+	}
 
-    public Long getOnPropertyId() {
-        return onPropertyId;
-    }
+	public Long getOnCommentId() {
+		return onCommentId;
+	}
 
-    public void setOnPropertyId(Long onPropertyId) {
-        this.onPropertyId = onPropertyId;
-    }
+	public void setOnCommentId(Long onCommentId) {
+		this.onCommentId = onCommentId;
+	}
+
+	public Long getOnPropertyId() {
+		return onPropertyId;
+	}
+
+	public void setOnPropertyId(Long onPropertyId) {
+		this.onPropertyId = onPropertyId;
+	}
 
 }

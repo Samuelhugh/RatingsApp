@@ -19,7 +19,6 @@ import com.rental_ratings.api.api.mvc.models.User;
 import com.rental_ratings.api.api.mvc.services.PropertyService;
 import com.rental_ratings.api.api.mvc.services.UserService;
 
-
 @Controller
 public class PropertyController {
 

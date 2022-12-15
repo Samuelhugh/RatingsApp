@@ -13,78 +13,78 @@ import com.rental_ratings.api.api.mvc.repositories.UserRepository;
 
 @Service
 public class UserService {
-    
-    private final UserRepository userRepository;
-    
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
 
-    public void validate(User newUser, BindingResult result) {
-        if (userRepository.findByEmail(newUser.getEmail()).isPresent()){
-            result.rejectValue("email", "Unique Email", "Email has already been used!");
-        }
+	private final UserRepository userRepository;
 
-        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
-            result.rejectValue("confirmPassword", "Matches", "The Confirm Password must match the Password!");
-        }
-    }
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
-    public User register (User newUser) {
+	public List<User> getAll() {
+		return userRepository.findAll();
+	}
 
-        String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
-        newUser.setPassword(hashedPassword);
-        return userRepository.save(newUser);
-    }
+	public void validate(User newUser, BindingResult result) {
+		if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
+			result.rejectValue("email", "Unique Email", "Email has already been used!");
+		}
 
-    public User authenticate(LoginUser newLogin, BindingResult result) {
-        Optional<User> user = userRepository.findByEmail(newLogin.getEmail());
-        if (!user.isPresent()) {
-            result.rejectValue("email", "Login Email","");
-            return null;
-        }
+		if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
+			result.rejectValue("confirmPassword", "Matches", "The Confirm Password must match the Password!");
+		}
+	}
 
-        if (!BCrypt.checkpw(newLogin.getPassword(), user.get().getPassword())) {
-            result.rejectValue("password", "Login Password", "Password does not match.");
-            return null;
-        }
-        return user.get();
-    }
+	public User register(User newUser) {
 
-    public User getById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            return user.get();
-        }
-    
-        return null;
-    }
-    
-    public User getByEmail(String email) {
-        Optional<User> u = userRepository.findByEmail(email);
-        if (u.isPresent()) {
-            return u.get();
-        }
-        return null;
-    }
-    
-    public User create(User user) {
-        return userRepository.save(user);
-    }
+		String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
+		newUser.setPassword(hashedPassword);
+		return userRepository.save(newUser);
+	}
 
-    public User update(User user) {
-        return userRepository.save(user);
-    }
+	public User authenticate(LoginUser newLogin, BindingResult result) {
+		Optional<User> user = userRepository.findByEmail(newLogin.getEmail());
+		if (!user.isPresent()) {
+			result.rejectValue("email", "Login Email", "");
+			return null;
+		}
 
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
+		if (!BCrypt.checkpw(newLogin.getPassword(), user.get().getPassword())) {
+			result.rejectValue("password", "Login Password", "Password does not match.");
+			return null;
+		}
+		return user.get();
+	}
 
-    public void delete(Long id) {
-        userRepository.deleteById(id);
-    }
+	public User getById(Long id) {
+		Optional<User> user = userRepository.findById(id);
+		if (user.isPresent()) {
+			return user.get();
+		}
+
+		return null;
+	}
+
+	public User getByEmail(String email) {
+		Optional<User> u = userRepository.findByEmail(email);
+		if (u.isPresent()) {
+			return u.get();
+		}
+		return null;
+	}
+
+	public User create(User user) {
+		return userRepository.save(user);
+	}
+
+	public User update(User user) {
+		return userRepository.save(user);
+	}
+
+	public void delete(User user) {
+		userRepository.delete(user);
+	}
+
+	public void delete(Long id) {
+		userRepository.deleteById(id);
+	}
 }
