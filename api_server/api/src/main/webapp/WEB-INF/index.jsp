@@ -52,7 +52,7 @@
                     <form:input path="lastName" type="text" class="form-control"/>
                     <form:errors path="email" class="text-danger font-italic"/>
                      <br/>
-                    <form:label path="email" class="py-2 font-weight-light">Email:</form:label>
+                    <form:label path="email" class="py-2 font-weight-light">E-mail:</form:label>
                     <form:input path="email" type="email" placeholder="email@example.com" class="form-control"/>
                     <form:errors path="password" class="text-danger font-italic"/>
                      <br/>
@@ -70,7 +70,7 @@
             <div class="col-12 col-md-4">
                 <form:form action="/login" method="post" modelAttribute="newLogin" class="p-4">
                     <h2 class="text-dark">Login</h2>
-                    <form:label path="email" class="py-2 font-weight-light">Email:</form:label>
+                    <form:label path="email" class="py-2 font-weight-light">E-mail:</form:label>
                      <br/>
                     <form:errors path="email" class="text-danger font-italic"/>
                     <form:input path="email" type="email" placeholder="email@example.com" class="form-control"/>
